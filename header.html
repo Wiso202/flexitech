@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexiTech - Accueil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      color: white;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('Images/fonds.jpeg') center/cover no-repeat;
+      z-index: 1;
+    }
+    header .container {
+      z-index: 2;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+    .navbar.scrolled {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff;
+    }
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin-right: 15px;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ffc107 !important;
+    }
+    h1.display-4 {
+      font-weight: 700;
+      font-size: 3.5rem;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    p.lead {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    .header-btns .btn {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 30px;
+    }
+</style>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">FlexiTech</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Accueil</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="service.">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tarifs.html">Grille tarifaire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header id="accueil">
+    <div class="container">
+      <h1 class="display-4">FLEXITECH</h1>
+      <p class="lead">L’informatique qui s’adapte à vos besoins</p>
+      <div class="header-btns">
+        <a href="contact.html" class="btn btn-warning">NOUS CONTACTER</a>
+        <a href="service.html" class="btn btn-outline-light">EN SAVOIR PLUS</a>
+      </div>
+    </div>
+  </header>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+</body>
+</html>

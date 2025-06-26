@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexiTech - Accueil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+/* Style général pour la section services */
+.services {
+  background-color: #f8f9fa; /* Couleur de fond légère */
+  padding-top: 60px;
+  padding-bottom: 60px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.services .service-item-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08); /* Ombre plus prononcée */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* Indique qu'elle est cliquable */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  position: relative;
+  overflow: hidden; /* Important pour les transitions de contenu */
+}
+
+.services .service-item-card:hover {
+  transform: translateY(-8px); /* Légère élévation au survol */
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15); /* Ombre plus grande au survol */
+}
+
+.services .service-item-card .icon-wrapper {
+  width: 80px;
+  height: 80px;
+  background-color: #ffc107; /* Fond de l'icône jaune */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  transition: background-color 0.3s ease;
+}
+
+.services .service-item-card:hover .icon-wrapper {
+  background-color: #e0a800; /* Jaune plus foncé au survol */
+}
+
+.services .service-item-card .icon {
+  font-size: 2.8rem; /* Taille de l'icône plus grande */
+  color: #fff; /* Couleur de l'icône blanche */
+  transition: transform 0.3s ease;
+}
+
+.services .service-item-card:hover .icon {
+  transform: scale(1.1); /* Zoom léger sur l'icône au survol */
+}
+
+.services .service-item-card .title {
+  font-size: 1.4rem; /* Titre plus grand */
+  font-weight: 700; /* Plus gras */
+  margin-bottom: 10px;
+  color: #212529; /* Couleur de texte plus foncée */
+}
+
+.services .service-item-card .short-description {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.services .service-item-card .btn-toggle {
+  margin-top: 15px;
+  width: auto;
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #fff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-weight: 600;
+  padding: 8px 25px;
+  border-radius: 50px; /* Bouton plus rond */
+}
+
+.services .service-item-card .btn-toggle:hover {
+  background-color: #e0a800;
+  border-color: #e0a800;
+}
+
+/* Contenu détaillé qui apparaît sous la carte */
+.service-full-details {
+  grid-column: 1 / -1; /* Prend toute la largeur de la grille */
+  background-color: #f0f2f5; /* Fond légèrement différent pour le détail */
+  border-radius: 12px;
+  padding: 30px;
+  margin-top: 20px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.05); /* Ombre interne */
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-20px); /* Cache initialement vers le haut */
+  transition: max-height 0.7s ease-out, opacity 0.5s ease-out, transform 0.7s ease-out;
+  pointer-events: none; /* Empêche les interactions quand caché */
+}
+
+.service-full-details.visible {
+  max-height: 2000px; /* Assez grand pour tout le contenu */
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto; /* Active les interactions quand visible */
+}
+
+.service-full-details .detail-category-title {
+    font-size: 1.8rem; /* Titre de catégorie plus grand */
+    font-weight: 700;
+    color: #343a40;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ffc107; /* Soulignement jaune */
+    padding-bottom: 10px;
+}
+
+.service-full-details .detail-item {
+    display: flex;
+    align-items: flex-start; /* Alignement en haut pour le texte */
+    margin-bottom: 20px;
+}
+
+.service-full-details .detail-item .detail-icon {
+    font-size: 1.5rem; /* Taille de l'icône de détail */
+    color: #ffc107;
+    margin-right: 15px;
+    flex-shrink: 0; /* Empêche l'icône de rétrécir */
+}
+
+.service-full-details .detail-item .detail-content {
+    flex-grow: 1; /* Permet au contenu de prendre l'espace restant */
+}
+
+.service-full-details .detail-item .detail-content h4 {
+    font-size: 1.25rem; /* Titre du sous-service */
+    font-weight: 600;
+    color: #495057;
+    margin-top: 0; /* Réinitialiser la marge supérieure */
+    margin-bottom: 5px;
+}
+
+.service-full-details .detail-item .detail-content p {
+    color: #6c757d;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0; /* Réinitialiser la marge inférieure */
+}
+
+
+/* Styles pour le titre de section principal */
+.services-title {
+  font-size: 2.5rem; /* Taille du titre de section */
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #212529;
+}
+
+.underline-bar {
+  width: 100px; /* Barre plus large */
+  height: 5px; /* Barre plus épaisse */
+  background-color: #ffc107;
+  border-radius: 3px;
+}
+
+/* Footer styles */
+.footer a:hover {
+  color: #ffc107 !important;
+  transition: 0.3s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .services .service-item-card {
+    padding: 25px;
+  }
+  .services .service-item-card .title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .services .service-item-card {
+    padding: 20px;
+  }
+  .services-title {
+    font-size: 2rem;
+  }
+  .service-full-details .detail-item {
+    flex-direction: column; /* Empile l'icône et le texte sur mobile */
+    align-items: center;
+    text-align: center;
+  }
+  .service-full-details .detail-item .detail-icon {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+ body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      color: white;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('Images/fonds.jpeg') center/cover no-repeat;
+      z-index: 1;
+    }
+    header .container {
+      z-index: 2;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+    .navbar.scrolled {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff;
+    }
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin-right: 15px;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ffc107 !important;
+    }
+    h1.display-4 {
+      font-weight: 700;
+      font-size: 3.5rem;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    p.lead {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    .header-btns .btn {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 30px;
+    }
+</style>
+<body>
+   
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">FlexiTech</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Accueil</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="service.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tarifs.html">Grille tarifaire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header id="accueil">
+    <div class="container">
+      <h1 class="display-4">FLEXITECH</h1>
+      <p class="lead">L’informatique qui s’adapte à vos besoins</p>
+      <div class="header-btns">
+        <a href="contact.html" class="btn btn-warning">NOUS CONTACTER</a>
+        <a href="service.html" class="btn btn-outline-light">EN SAVOIR PLUS</a>
+      </div>
+    </div>
+  </header>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+<section id="services" class="services section py-5">
+  <div class="container text-center section-title" data-aos="fade-up">
+    <h2 class="services-title d-inline-block">Nos Domaines d’intervention</h2>
+    <div class="underline-bar mx-auto mb-4"></div>
+    <p class="mx-auto" style="max-width:700px;">
+      FlexiTech propose des services variés, professionnels et accessibles pour tous vos besoins numériques. Découvrez nos expertises ci-dessous.
+    </p>
+  </div>
+
+  <div class="container">
+    <div class="row gy-4" id="service-cards-container">
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-item-card" data-service-id="dev">
+          <div class="icon-wrapper">
+            <i class="bi bi-code-slash icon"></i>
+          </div>
+          <h4 class="title">Création de site web</h4>
+          <p class="short-description">Sites vitrines, e-commerce ou sur mesure, design responsive et optimisés SEO.</p>
+          <button class="btn btn-toggle">Voir plus</button>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-item-card" data-service-id="depannage">
+          <div class="icon-wrapper">
+            <i class="bi bi-tools icon"></i>
+          </div>
+          <h4 class="title">Dépannage informatique</h4>
+          <p class="short-description">Réparation de PC lents, infectés ou bloqués. Nettoyage et optimisation complète.</p>
+          <button class="btn btn-toggle">Voir plus</button>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="service-item-card" data-service-id="installation">
+          <div class="icon-wrapper">
+            <i class="bi bi-cloud-download icon"></i>
+          </div>
+          <h4 class="title">Installation de logiciels</h4>
+          <p class="short-description">Windows, Office, antivirus, logiciels spécifiques selon vos besoins.</p>
+          <button class="btn btn-toggle">Voir plus</button>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+        <div class="service-item-card" data-service-id="reseaux">
+          <div class="icon-wrapper">
+            <i class="bi bi-share icon"></i>
+          </div>
+          <h4 class="title">Réseaux informatiques simples</h4>
+          <p class="short-description">Mise en réseau de plusieurs appareils avec partage sécurisé de connexion, fichiers et imprimantes.</p>
+          <button class="btn btn-toggle">Voir plus</button>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+        <div class="service-item-card" data-service-id="formation">
+          <div class="icon-wrapper">
+            <i class="bi bi-mortarboard icon"></i>
+          </div>
+          <h4 class="title">Formation & Accompagnement</h4>
+          <p class="short-description">Apprenez à utiliser l’outil informatique avec des formations accessibles et sur mesure.</p>
+          <button class="btn btn-toggle">Voir plus</button>
+        </div>
+      </div>
+
+       <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+        <div class="service-item-card" data-service-id="cloud">
+          <div class="icon-wrapper">
+            <i class="bi bi-cloud-arrow-up icon"></i>
+          </div>
+          <h4 class="title">Cloud & Services Web</h4>
+          <p class="short-description">Hébergement, noms de domaine, sauvegardes cloud et migrations professionnelles.</p>
+          <button class="btn btn-toggle">Voir plus</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="full-details-container"></div>
+
+  </div>
+</section>
+
+<footer class="footer bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+      <div class="row text-center text-md-start">
+        
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">FlexiTech</h5>
+          <p>
+            FlexiTech vous accompagne dans la transformation numérique : sites web, dépannage, réseaux, logiciels et formation. Des solutions flexibles, accessibles et fiables.
+          </p>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Navigation</h5>
+          <p><a href="index.html" class="text-white text-decoration-none">Qui sommes-nous</a></p>
+          <p><a href="service.html" class="text-white text-decoration-none">Services</a></p>
+          <p><a href="tarifs.html" class="text-white text-decoration-none">Tarifs</a></p>
+          <p><a href="contact.html" class="text-white text-decoration-none">Contact</a></p>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+          <p><i class="bi bi-envelope-fill"></i> memegnonlewis@icloud.com</p>
+          <p><i class="bi bi-phone-fill"></i> +229 01 40 43 41 20</p>
+          <p><i class="bi bi-geo-alt-fill"></i> Cotonou, Bénin</p>
+        </div>
+
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Suivez-nous</h5>
+          <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-whatsapp fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-linkedin fs-4"></i></a>
+        </div>
+
+      </div>
+      <hr class="my-3 text-white" />
+      <div class="row text-center">
+        <div class="col">
+          <p class="mb-0">© 2025 FlexiTech. Tous droits réservés.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+  window.addEventListener('scroll', function () {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const serviceCards = document.querySelectorAll('.service-item-card');
+    const fullDetailsContainer = document.getElementById('full-details-container');
+
+    // Définir le contenu détaillé pour chaque service
+    const serviceDetails = {
+      dev: `
+        <h3 class="detail-category-title">Développement & Création</h3>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Création de site web vitrine</h4>
+                <p>Conception de sites modernes et adaptés à tous les écrans pour présenter vos services, activités ou entreprise sur Internet, avec une navigation fluide et professionnelle.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Création de boutique en ligne (e-commerce)</h4>
+                <p>Mise en place de plateformes de vente en ligne sécurisées pour vendre vos produits ou services 24h/24 avec intégration de paiement mobile ou carte bancaire.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Création de portfolio personnalisé</h4>
+                <p>Design de sites élégants pour les artistes, freelances, photographes, développeurs… afin de valoriser vos projets, compétences et parcours.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Développement de logiciels desktop</h4>
+                <p>Création de logiciels sur mesure (Windows/Linux) pour automatiser vos tâches, gérer votre entreprise, stocker vos données ou suivre vos clients.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Web app sur mesure</h4>
+                <p>Développement d’applications accessibles via Internet (type gestion de stock, réservation, suivi de factures) adaptées à vos besoins réels.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Intégration de système de réservation</h4>
+                <p>Conception de systèmes de réservation en ligne (billets de bus, rdv, évènements…) pour faciliter la gestion de vos clients.</p>
+            </div>
+        </div>
+      `,
+      depannage: `
+        <h3 class="detail-category-title">Maintenance & Réparation</h3>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Diagnostic de panne (matériel & logiciel)</h4>
+                <p>Analyse complète pour identifier l’origine des problèmes que rencontre votre ordinateur (lent, ne démarre plus, écran bleu…).</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Réparation de panne logicielle</h4>
+                <p>Résolution des bugs, erreurs système, blocages ou ralentissements dus à des problèmes logiciels ou fichiers corrompus.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Réinstallation de systèmes d’exploitation</h4>
+                <p>Formatage complet et installation propre de Windows, Linux ou autre système pour redonner une seconde vie à votre ordinateur.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Installation de pilotes (drivers)</h4>
+                <p>Installation et mise à jour des pilotes nécessaires pour faire fonctionner correctement votre matériel (audio, wifi, imprimante...).</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Nettoyage & optimisation</h4>
+                <p>Suppression des virus, fichiers inutiles, logiciels espions et amélioration des performances globales de votre appareil.</p>
+            </div>
+        </div>
+      `,
+      installation: `
+        <h3 class="detail-category-title">Installation & Configuration</h3>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Installation de Microsoft Office</h4>
+                <p>Mise en place de Word, Excel, PowerPoint, Outlook, et configuration selon vos besoins (avec licence ou version gratuite selon le cas).</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Installation et configuration d'antivirus</h4>
+                <p>Protection de votre système contre les virus, ransomwares et menaces en ligne avec un antivirus fiable et bien configuré.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Création d’adresses e-mail professionnelles</h4>
+                <p>Création d’e-mails personnalisés avec votre nom de domaine (ex : contact@votreentreprise.com) pour renforcer votre image professionnelle.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Installation de logiciels spécialisés</h4>
+                <p>Installation de logiciels éducatifs, comptables, graphiques, de gestion ou tout autre outil selon vos besoins.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Configuration d’imprimantes et périphériques</h4>
+                <p>Connexion et configuration d'imprimantes, scanners, caméras, claviers, etc., avec votre ordinateur ou votre réseau.</p>
+            </div>
+        </div>
+      `,
+      reseaux: `
+        <h3 class="detail-category-title">Réseaux & Sécurité Informatique</h3>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Sécurisation du Wi-Fi à domicile ou en entreprise</h4>
+                <p>Changement des identifiants d’usine, ajout d'un mot de passe fort, et masquage du réseau si besoin.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Installation de répéteur ou extension Wi-Fi</h4>
+                <p>Aide à l'extension du signal Wi-Fi dans toute la maison/bureau.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Partage de connexion Internet entre plusieurs PC (LAN simple)</h4>
+                <p>Création d'un réseau local pour partager la connexion Internet (routeur ou câble RJ45).</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Partage de fichiers ou imprimante en réseau</h4>
+                <p>Connexion de deux ordinateurs (ou plus) pour qu’ils puissent partager des fichiers ou une imprimante.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Optimisation de la bande passante</h4>
+                <p>Réglage des paramètres du routeur pour limiter certaines connexions, prioriser les usages importants.</p>
+            </div>
+        </div>
+      `,
+      formation: `
+        <h3 class="detail-category-title">Formations & Conseils</h3>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Initiation à l’informatique</h4>
+                <p>Formation de base pour débutants : apprendre à utiliser un ordinateur, envoyer un e-mail, créer un document…</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Formation sur logiciels spécifiques</h4>
+                <p>Apprentissage personnalisé sur Word, Excel, Canva, Photoshop, logiciels de gestion, etc.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Audit et conseil informatique</h4>
+                <p>Analyse de vos équipements et recommandations pour améliorer votre système informatique.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Sensibilisation à la cybersécurité</h4>
+                <p>Apprendre à reconnaître les arnaques, sécuriser ses mots de passe et utiliser Internet en toute sécurité.</p>
+            </div>
+        </div>
+      `,
+      cloud: `
+        <h3 class="detail-category-title">Cloud & Services Web</h3>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Hébergement de sites web</h4>
+                <p>Mise en ligne de votre site sur des serveurs rapides et sécurisés pour qu’il soit accessible partout, à tout moment.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Nom de domaine personnalisé</h4>
+                <p>Achat et configuration de votre adresse web (ex : www.monsite.com) pour une image professionnelle.</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Sauvegarde cloud</h4>
+                <p>Protection de vos fichiers importants avec des solutions de sauvegarde automatique sur Internet (Google Drive, OneDrive, etc.).</p>
+            </div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-icon"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="detail-content">
+                <h4>Migration vers Google Workspace / Microsoft 365</h4>
+                <p>Transition professionnelle de vos comptes et données vers des solutions collaboratives modernes (e-mails, stockage, partage…).</p>
+            </div>
+        </div>
+      `
+    };
+
+    let currentExpandedDetails = null;
+
+    serviceCards.forEach(card => {
+      const toggleButton = card.querySelector('.btn-toggle');
+      const serviceId = card.dataset.serviceId;
+
+      toggleButton.addEventListener('click', () => {
+        const fullDetailsDivId = `details-${serviceId}`;
+        let fullDetailsDiv = document.getElementById(fullDetailsDivId);
+
+        if (fullDetailsDiv && fullDetailsDiv.classList.contains('visible')) {
+          // Si les détails de cette carte sont déjà visibles, les cacher
+          fullDetailsDiv.classList.remove('visible');
+          toggleButton.textContent = 'Voir plus';
+          currentExpandedDetails = null;
+        } else {
+          // Cacher les détails actuellement affichés, s'il y en a
+          if (currentExpandedDetails) {
+            currentExpandedDetails.classList.remove('visible');
+            // Trouver le bouton "Voir moins" de la carte précédente et le remettre à "Voir plus"
+            const prevServiceId = currentExpandedDetails.id.replace('details-', '');
+            const prevCard = document.querySelector(`.service-item-card[data-service-id="${prevServiceId}"]`);
+            if (prevCard) {
+                prevCard.querySelector('.btn-toggle').textContent = 'Voir plus';
+            }
+          }
+
+          // Créer ou récupérer l'élément de détails
+          if (!fullDetailsDiv) {
+            fullDetailsDiv = document.createElement('div');
+            fullDetailsDiv.id = fullDetailsDivId;
+            fullDetailsDiv.classList.add('service-full-details');
+            fullDetailsDiv.innerHTML = serviceDetails[serviceId];
+            
+            const parentRow = document.getElementById('service-cards-container');
+            const cardElement = card.closest('.col-lg-4, .col-md-6');
+            if (parentRow && cardElement) {
+                const cardIndex = Array.from(parentRow.children).indexOf(cardElement);
+                let insertAfterElement = null;
+
+                if (window.innerWidth >= 992) { // Desktop (3 colonnes)
+                    insertAfterElement = parentRow.children[Math.floor(cardIndex / 3) * 3 + 2];
+                } else if (window.innerWidth >= 768) { // Tablette (2 colonnes)
+                    insertAfterElement = parentRow.children[Math.floor(cardIndex / 2) * 2 + 1];
+                } else { // Mobile (1 colonne)
+                    insertAfterElement = parentRow.children[cardIndex];
+                }
+
+                if (insertAfterElement) {
+                    insertAfterElement.after(fullDetailsDiv);
+                } else {
+                    parentRow.appendChild(fullDetailsDiv);
+                }
+            } else {
+                fullDetailsContainer.appendChild(fullDetailsDiv);
+            }
+          }
+
+          fullDetailsDiv.classList.add('visible');
+          toggleButton.textContent = 'Voir moins';
+          currentExpandedDetails = fullDetailsDiv;
+
+          // Faire défiler vers les détails
+          setTimeout(() => {
+            fullDetailsDiv.scrollIntoView({ behavior: 'smooth', block: 'start', offsetTop: 20 });
+          }, 600); // Délai pour laisser la transition se faire
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

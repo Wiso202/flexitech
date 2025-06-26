@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexiTech - Accueil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .footer a:hover {
+  color: #ffc107 !important;
+  transition: 0.3s;
+}
+
+  </style>
+<body>
+  <footer class="footer bg-dark text-white pt-5 pb-4">
+  <div class="container text-center text-md-start">
+    <div class="row text-center text-md-start">
+      
+      <!-- Logo & Présentation -->
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">FlexiTech</h5>
+        <p>
+          FlexiTech vous accompagne dans la transformation numérique : sites web, dépannage, réseaux, logiciels et formation. Des solutions flexibles, accessibles et fiables.
+        </p>
+      </div>
+
+      <!-- Liens utiles -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Navigation</h5>
+        <p><a href="#about" class="text-white text-decoration-none">Qui sommes-nous</a></p>
+        <p><a href="#services" class="text-white text-decoration-none">Services</a></p>
+        <p><a href="#tarifs" class="text-white text-decoration-none">Tarifs</a></p>
+        <p><a href="#contact" class="text-white text-decoration-none">Contact</a></p>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+        <p><i class="bi bi-envelope-fill"></i> contact@flexitech.bj</p>
+        <p><i class="bi bi-phone-fill"></i> +229 97 00 00 00</p>
+        <p><i class="bi bi-geo-alt-fill"></i> Cotonou, Bénin</p>
+      </div>
+
+      <!-- Réseaux sociaux -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Suivez-nous</h5>
+        <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+        <a href="#" class="text-white me-3"><i class="bi bi-whatsapp fs-4"></i></a>
+        <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+        <a href="#" class="text-white"><i class="bi bi-linkedin fs-4"></i></a>
+      </div>
+
+    </div>
+    <hr class="my-3 text-white" />
+    <div class="row text-center">
+      <div class="col">
+        <p class="mb-0">© 2025 FlexiTech. Tous droits réservés.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+</body>
+</html>

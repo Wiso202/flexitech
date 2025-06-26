@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexiTech - Grille Tarifaire</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Variables de couleur */
+    :root {
+      --flexitech-yellow: #FFD700; /* Un jaune doré, moins tape-à-l'œil */
+      --flexitech-dark-yellow: #DAA520; /* Une nuance plus foncée pour le hover */
+    }
+
+    /* Styles généraux */
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #343a40;
+      background-color: #f8f9fa;
+    }
+
+    .section-title {
+      padding-bottom: 30px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #212529;
+    }
+
+    .underline-bar {
+      width: 100px;
+      height: 5px;
+      background-color: var(--flexitech-yellow);
+      border-radius: 3px;
+      margin: 0 auto 30px auto;
+    }
+
+    .section-title p {
+      text-align: center;
+      margin: 0 auto;
+      max-width: 700px;
+      color: #6c757d;
+      font-size: 1.1rem;
+    }
+
+    /* Styles des forfaits (Pricing Cards) */
+    .pricing .box {
+      padding: 40px;
+      background: #fff;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .pricing .box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .pricing h3 {
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      color: #343a40;
+    }
+
+    .pricing h4 {
+      font-size: 2.8rem;
+      color: var(--flexitech-yellow);
+      font-weight: 700;
+      font-family: "Poppins", sans-serif;
+      margin-bottom: 25px;
+    }
+
+    .pricing h4 sup {
+      font-size: 1.5rem;
+      top: -15px;
+      vertical-align: top;
+    }
+
+    .pricing h4 span {
+      color: #6c757d;
+      font-size: 1.1rem;
+      display: inline;
+      font-weight: 400;
+    }
+
+    .pricing ul {
+      padding: 0;
+      list-style: none;
+      color: #495057;
+      text-align: left;
+      margin-bottom: 35px;
+      flex-grow: 1;
+    }
+
+    .pricing ul li {
+      padding: 10px 0;
+      display: flex;
+      align-items: flex-start;
+      font-size: 1.05rem;
+    }
+
+    .pricing ul i {
+      color: #28a745;
+      font-size: 1.2rem;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .pricing ul .na {
+      color: #adb5bd;
+      text-decoration: line-through;
+    }
+
+    .pricing ul .na i {
+      color: #dc3545;
+    }
+
+    .pricing .buy-btn {
+      background-color: var(--flexitech-yellow);
+      color: #fff;
+      border: 0;
+      padding: 14px 40px;
+      border-radius: 50px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .pricing .buy-btn:hover {
+      background-color: var(--flexitech-dark-yellow);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Styles pour les accordéons de services individuels */
+    .accordion-item {
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        overflow: hidden; /* Pour que les coins soient bien arrondis */
+    }
+
+    .accordion-button {
+        background-color: #f0f2f5;
+        color: #343a40;
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding: 25px;
+        border-bottom: 2px solid var(--flexitech-yellow);
+        border-radius: 12px 12px 0 0 !important; /* Coins supérieurs arrondis */
+        transition: background-color 0.3s ease;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #212529;
+        background-color: #e9ecef; /* Légèrement plus foncé quand ouvert */
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .08);
+    }
+
+    .accordion-button:focus {
+        border-color: var(--flexitech-yellow);
+        box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25); /* Ombre focus du jaune */
+    }
+
+    .accordion-body {
+        padding: 30px;
+        background-color: #fff;
+    }
+
+    .service-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .service-card {
+        background-color: #fcfcfc;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 180px; /* Pour une hauteur plus uniforme */
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .service-card .card-icon {
+        font-size: 2rem;
+        color: var(--flexitech-yellow);
+        margin-bottom: 15px;
+    }
+
+    .service-card .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #343a40;
+        margin-bottom: 10px;
+    }
+
+    .service-card .card-price {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--flexitech-yellow);
+        margin-top: auto;
+    }
+    
+    /* Ajustements responsive */
+    @media (max-width: 768px) {
+        .pricing h4 {
+            font-size: 2.2rem;
+        }
+        .pricing .box {
+            padding: 30px;
+        }
+        .accordion-button {
+            font-size: 1.3rem;
+            padding: 20px;
+        }
+        .accordion-body {
+            padding: 20px;
+        }
+        .service-cards-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .service-card {
+            padding: 18px;
+            min-height: 160px;
+        }
+        .service-card .card-title {
+            font-size: 1.15rem;
+        }
+        .service-card .card-price {
+            font-size: 1.3rem;
+        }
+        .section-title h2 {
+            font-size: 2rem;
+        }
+        .section-title p {
+            font-size: 1rem;
+        }
+    }
+    @media (max-width: 576px) {
+        .pricing .box {
+            padding: 25px;
+        }
+        .service-cards-grid {
+            grid-template-columns: 1fr;
+            padding: 15px;
+        }
+        .service-card {
+            padding: 15px;
+            min-height: auto; /* Supprimer la hauteur min sur mobile pour s'adapter au contenu */
+        }
+        .pricing h4 {
+            font-size: 2rem;
+        }
+        .pricing ul li {
+            font-size: 1rem;
+        }
+        .pricing .buy-btn {
+            padding: 10px 25px;
+            font-size: 0.9rem;
+        }
+        .accordion-button {
+            font-size: 1.1rem;
+            padding: 18px;
+        }
+    }
+
+    /* Footer styles */
+    .footer a:hover {
+      color: var(--flexitech-yellow) !important;
+      transition: 0.3s;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      color: white;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('Images/fonds.jpeg') center/cover no-repeat;
+      z-index: 1;
+    }
+    header .container {
+      z-index: 2;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+    .navbar.scrolled {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff;
+    }
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin-right: 15px;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ffc107 !important;
+    }
+    h1.display-4 {
+      font-weight: 700;
+      font-size: 3.5rem;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    p.lead {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    .header-btns .btn {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 30px;
+    }
+  </style>
+</head>
+<body>
+     
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">FlexiTech</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Accueil</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="service.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tarifs.html">Grille tarifaire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header id="accueil">
+    <div class="container">
+      <h1 class="display-4">FLEXITECH</h1>
+      <p class="lead">L’informatique qui s’adapte à vos besoins</p>
+      <div class="header-btns">
+        <a href="contact.html" class="btn btn-warning">NOUS CONTACTER</a>
+        <a href="service.html" class="btn btn-outline-light">EN SAVOIR PLUS</a>
+      </div>
+    </div>
+  </header>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+  <main id="main">
+    <section id="tarifs" class="pricing section py-5">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title text-center">
+          <h2>Nos Tarifs</h2>
+          <div class="underline-bar"></div>
+          <p>
+            Découvrez nos forfaits adaptés à vos besoins et notre grille tarifaire détaillée pour chaque service.
+            Des solutions flexibles et transparentes pour tous les budgets.
+          </p>
+        </div>
+
+        <h3 class="text-center mb-4 mt-5">Nos Forfaits Packagés</h3>
+        <p class="text-center mb-5 text-muted">
+            Des offres complètes pour démarrer votre projet en toute simplicité.
+        </p>
+        <div class="row gy-4">
+
+          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <h3>Pack Start</h3>
+              <h4><sup>FCFA</sup>50 000 <span>/ unique</span></h4>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> Installation système Windows</li>
+                <li><i class="bi bi-check-circle-fill"></i> Installation Office + Antivirus</li>
+                <li><i class="bi bi-check-circle-fill"></i> Nettoyage et optimisation PC</li>
+                <li><i class="bi bi-check-circle-fill"></i> 1 email professionnel offert (nom@domaine.com)</li>
+                <li class="na"><i class="bi bi-x-circle-fill"></i> Création site web vitrine</li>
+                <li class="na"><i class="bi bi-x-circle-fill"></i> Support technique étendu</li>
+              </ul>
+              <a href="#" class="buy-btn">Choisir ce pack</a>
+            </div>
+          </div><div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="box">
+              <h3>Pack Entrepreneur</h3>
+              <h4><sup>FCFA</sup>120 000 <span>/ unique</span></h4>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> Création site web vitrine (4 pages)</li>
+                <li><i class="bi bi-check-circle-fill"></i> Nom de domaine + hébergement 1 an</li>
+                <li><i class="bi bi-check-circle-fill"></i> Email professionnel + messagerie connectée</li>
+                <li><i class="bi bi-check-circle-fill"></i> Sécurité site + certificat SSL offert</li>
+                <li class="na"><i class="bi bi-x-circle-fill"></i> Support technique étendu</li>
+              </ul>
+              <a href="#" class="buy-btn">Choisir ce pack</a>
+            </div>
+          </div><div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="box">
+              <h3>Pack Premium Entreprise</h3>
+              <h4><sup>FCFA</sup>250 000 <span>/ unique</span></h4>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> Site web pro (multi-pages + responsive)</li>
+                <li><i class="bi bi-check-circle-fill"></i> Email pro illimité + messagerie Gmail ou Outlook</li>
+                <li><i class="bi bi-check-circle-fill"></i> Logo + design graphique inclus</li>
+                <li><i class="bi bi-check-circle-fill"></i> Formation à l’utilisation du site</li>
+                <li><i class="bi bi-check-circle-fill"></i> Optimisation pour moteurs de recherche (SEO de base)</li>
+                <li><i class="bi bi-check-circle-fill"></i> Support technique pendant 3 mois</li>
+              </ul>
+              <a href="#" class="buy-btn">Choisir ce pack</a>
+            </div>
+          </div></div>
+
+        <h3 class="text-center mb-4 mt-5 pt-5">Grille des Services Individuels</h3>
+        <p class="text-center mb-5 text-muted">
+            Explorez nos services à la carte en dépliant les catégories qui vous intéressent.
+        </p>
+
+        <div class="accordion" id="servicesAccordion">
+          <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Réseaux & Objets Connectés
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#servicesAccordion">
+              <div class="accordion-body">
+                <div class="service-cards-grid">
+                    <div class="service-card">
+                        <i class="bi bi-shield-lock card-icon"></i>
+                        <div class="card-title">Sécurisation Wi-Fi</div>
+                        <div class="card-price">10k – 15k FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-broadcast card-icon"></i>
+                        <div class="card-title">Extension Wi-Fi</div>
+                        <div class="card-price">10k – 20k FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-ethernet card-icon"></i>
+                        <div class="card-title">Partage Internet LAN</div>
+                        <div class="card-price">15k – 25k FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-folder-shared card-icon"></i>
+                        <div class="card-title">Partage fichiers/imprimante</div>
+                        <div class="card-price">15k FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-display card-icon"></i>
+                        <div class="card-title">Connexion objets (cam, smart TV)</div>
+                        <div class="card-price">10k – 20k FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-cpu card-icon"></i>
+                        <div class="card-title">Optimisation routeur</div>
+                        <div class="card-price">10k FCFA</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Développement & Création
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#servicesAccordion">
+              <div class="accordion-body">
+                <div class="service-cards-grid">
+                    <div class="service-card">
+                        <i class="bi bi-window card-icon"></i>
+                        <div class="card-title">Création site web vitrine (4 pages)</div>
+                        <div class="card-price">80 000 – 150 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-globe-americas card-icon"></i>
+                        <div class="card-title">Site web personnalisé (multi-pages + responsive)</div>
+                        <div class="card-price">120 000 – 250 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-cart-fill card-icon"></i>
+                        <div class="card-title">Boutique en ligne (e-commerce)</div>
+                        <div class="card-price">150 000 – 300 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-file-earmark-person card-icon"></i>
+                        <div class="card-title">Création de portfolio professionnel</div>
+                        <div class="card-price">40 000 – 70 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-laptop card-icon"></i>
+                        <div class="card-title">Développement de logiciel desktop</div>
+                        <div class="card-price">100 000 – 300 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-app-indicator card-icon"></i>
+                        <div class="card-title">Développement de web app personnalisée</div>
+                        <div class="card-price">150 000 – 400 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-calendar-check card-icon"></i>
+                        <div class="card-title">Système de réservation en ligne</div>
+                        <div class="card-price">120 000 – 250 000 FCFA</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Maintenance & Réparation
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#servicesAccordion">
+              <div class="accordion-body">
+                <div class="service-cards-grid">
+                    <div class="service-card">
+                        <i class="bi bi-clipboard-pulse card-icon"></i>
+                        <div class="card-title">Diagnostic de panne (logiciel/matériel)</div>
+                        <div class="card-price">5 000 – 10 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-wrench card-icon"></i>
+                        <div class="card-title">Réparation de panne logicielle</div>
+                        <div class="card-price">10 000 – 20 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-arrow-clockwise card-icon"></i>
+                        <div class="card-title">Réinstallation système (Windows/Linux)</div>
+                        <div class="card-price">10 000 – 15 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-gear-fill card-icon"></i>
+                        <div class="card-title">Installation de pilotes</div>
+                        <div class="card-price">5 000 – 10 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-speedometer2 card-icon"></i>
+                        <div class="card-title">Nettoyage + optimisation ordinateur</div>
+                        <div class="card-price">8 000 – 15 000 FCFA</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Installation & Configuration
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#servicesAccordion">
+              <div class="accordion-body">
+                <div class="service-cards-grid">
+                    <div class="service-card">
+                        <i class="bi bi-file-earmark-text card-icon"></i>
+                        <div class="card-title">Installation Microsoft Office (licence client)</div>
+                        <div class="card-price">5 000 – 10 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-virus card-icon"></i>
+                        <div class="card-title">Installation et configuration antivirus</div>
+                        <div class="card-price">5 000 – 10 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-envelope-fill card-icon"></i>
+                        <div class="card-title">Création d’email professionnel (avec domaine fourni)</div>
+                        <div class="card-price">10 000 – 20 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-envelope-open-fill card-icon"></i>
+                        <div class="card-title">Création + config email + nom de domaine</div>
+                        <div class="card-price">20 000 – 30 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-box-seam card-icon"></i>
+                        <div class="card-title">Installation de logiciels spécialisés</div>
+                        <div class="card-price">5 000 – 15 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-printer-fill card-icon"></i>
+                        <div class="card-title">Configuration imprimantes/périphériques</div>
+                        <div class="card-price">5 000 – 15 000 FCFA</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-aos="fade-up" data-aos-delay="500">
+            <h2 class="accordion-header" id="headingFive">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                Cloud & Services Web
+              </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#servicesAccordion">
+              <div class="accordion-body">
+                <div class="service-cards-grid">
+                    <div class="service-card">
+                        <i class="bi bi-cloud-arrow-up-fill card-icon"></i>
+                        <div class="card-title">Hébergement de site (1 an)</div>
+                        <div class="card-price">15 000 – 30 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-globe2 card-icon"></i>
+                        <div class="card-title">Nom de domaine (1 an)</div>
+                        <div class="card-price">10 000 – 15 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-hdd-stack-fill card-icon"></i>
+                        <div class="card-title">Sauvegarde Cloud & automatisation</div>
+                        <div class="card-price">10 000 – 25 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-microsoft card-icon"></i>
+                        <div class="card-title">Migration Google Workspace / Microsoft 365</div>
+                        <div class="card-price">15 000 – 40 000 FCFA</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-aos="fade-up" data-aos-delay="600">
+            <h2 class="accordion-header" id="headingSix">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                Formations & Conseils
+              </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#servicesAccordion">
+              <div class="accordion-body">
+                <div class="service-cards-grid">
+                    <div class="service-card">
+                        <i class="bi bi-book-half card-icon"></i>
+                        <div class="card-title">Initiation à l’informatique (1h à 2h)</div>
+                        <div class="card-price">5 000 – 10 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-tools card-icon"></i>
+                        <div class="card-title">Formation logiciel spécifique (Word, Excel, etc.)</div>
+                        <div class="card-price">10 000 – 20 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-search card-icon"></i>
+                        <div class="card-title">Audit informatique PME</div>
+                        <div class="card-price">15 000 – 30 000 FCFA</div>
+                    </div>
+                    <div class="service-card">
+                        <i class="bi bi-person-badge card-icon"></i>
+                        <div class="card-title">Sensibilisation cybersécurité (par groupe)</div>
+                        <div class="card-price">20 000 – 50 000 FCFA</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+      <div class="row text-center text-md-start">
+        
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">FlexiTech</h5>
+          <p>
+            FlexiTech vous accompagne dans la transformation numérique : sites web, dépannage, réseaux, logiciels et formation. Des solutions flexibles, accessibles et fiables.
+          </p>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Navigation</h5>
+          <p><a href="index.html" class="text-white text-decoration-none">Qui sommes-nous</a></p>
+          <p><a href="service.html" class="text-white text-decoration-none">Services</a></p>
+          <p><a href="tarifs.html" class="text-white text-decoration-none">Tarifs</a></p>
+          <p><a href="contact.html" class="text-white text-decoration-none">Contact</a></p>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+          <p><i class="bi bi-envelope-fill"></i> memegnonlewis@icloud.com</p>
+          <p><i class="bi bi-phone-fill"></i> +229 01 40 43 41 20</p>
+          <p><i class="bi bi-geo-alt-fill"></i> Cotonou, Bénin</p>
+        </div>
+
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Suivez-nous</h5>
+          <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-whatsapp fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-linkedin fs-4"></i></a>
+        </div>
+
+      </div>
+      <hr class="my-3 text-white" />
+      <div class="row text-center">
+        <div class="col">
+          <p class="mb-0">© 2025 FlexiTech. Tous droits réservés.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+      }
+    });
+  </script>
+</body>
+</html>

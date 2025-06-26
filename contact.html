@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexiTech - Contact</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Variables de couleur */
+    :root {
+      --flexitech-yellow: #FFD700; /* Un jaune doré */
+      --flexitech-dark-yellow: #DAA520; /* Une nuance plus foncée pour le hover */
+    }
+
+    /* Styles généraux */
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #343a40;
+      background-color: #f8f9fa;
+    }
+
+    .section-title {
+      padding-bottom: 30px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #212529;
+    }
+
+    .underline-bar {
+      width: 100px;
+      height: 5px;
+      background-color: var(--flexitech-yellow);
+      border-radius: 3px;
+      margin: 0 auto 30px auto;
+    }
+
+    .section-title p {
+      text-align: center;
+      margin: 0 auto;
+      max-width: 700px;
+      color: #6c757d;
+      font-size: 1.1rem;
+    }
+
+    /* Styles spécifiques à la section contact */
+    #contact {
+      padding: 60px 0;
+    }
+
+    #contact .info {
+      padding: 30px;
+      background: #fff;
+      width: 100%;
+      box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    #contact .info i {
+      font-size: 20px;
+      color: var(--flexitech-yellow);
+      float: left;
+      width: 44px;
+      height: 44px;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    #contact .info h4 {
+      padding: 0 0 0 60px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #343a40;
+    }
+
+    #contact .info p {
+      padding: 0 0 0 60px;
+      margin-bottom: 0;
+      font-size: 1rem;
+      color: #6c757d;
+    }
+
+    #contact .info .email, #contact .info .phone {
+      margin-top: 40px;
+    }
+    
+    /* Bouton WhatsApp */
+    .whatsapp-btn {
+        background-color: #25D366; /* Vert WhatsApp */
+        color: white;
+        padding: 12px 25px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        transition: background-color 0.3s ease;
+        margin-top: 20px; /* Espace après les infos de contact */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .whatsapp-btn:hover {
+        background-color: #1DA851;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .whatsapp-btn i {
+        font-size: 1.5rem;
+        margin-right: 10px;
+    }
+
+    /* Formulaire de contact */
+    #contact .html-email-form {
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    #contact .html-email-form .form-group {
+      padding-bottom: 15px;
+    }
+
+    #contact .html-email-form input,
+    #contact .html-email-form textarea {
+      border-radius: 8px;
+      box-shadow: none;
+      font-size: 1rem;
+      border: 1px solid #ced4da;
+      padding: 10px 15px;
+    }
+
+    #contact .html-email-form input:focus,
+    #contact .html-email-form textarea:focus {
+      border-color: var(--flexitech-yellow);
+      box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+    }
+
+    #contact .html-email-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    #contact .html-email-form button[type="submit"] {
+      background: var(--flexitech-yellow);
+      border: 0;
+      padding: 14px 40px;
+      color: #fff;
+      transition: 0.4s;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    #contact .html-email-form button[type="submit"]:hover {
+      background: var(--flexitech-dark-yellow);
+    }
+
+    /* Message de succès/erreur */
+    .alert {
+        display: block; /* S'assure que les alertes Bootstrap sont visibles */
+    }
+
+    /* Styles pour masquer les messages de base que vous aviez dans le HTML */
+    .sent-message, .error-message {
+        display: none !important; 
+    }
+
+    /* Footer styles (comme dans les pages précédentes) */
+    .footer a:hover {
+      color: var(--flexitech-yellow) !important;
+      transition: 0.3s;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      color: white;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('Images/fonds.jpeg') center/cover no-repeat;
+      z-index: 1;
+    }
+    header .container {
+      z-index: 2;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+    .navbar.scrolled {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff;
+    }
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin-right: 15px;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ffc107 !important;
+    }
+    h1.display-4 {
+      font-weight: 700;
+      font-size: 3.5rem;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    p.lead {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 100ms ease-in-out;
+    }
+    .header-btns .btn {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 30px;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">FlexiTech</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Accueil</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="service.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tarifs.html">Grille tarifaire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header id="accueil">
+    <div class="container">
+      <h1 class="display-4">FLEXITECH</h1>
+      <p class="lead">L’informatique qui s’adapte à vos besoins</p>
+      <div class="header-btns">
+        <a href="contact.html" class="btn btn-warning">NOUS CONTACTER</a>
+        <a href="service.html" class="btn btn-outline-light">EN SAVOIR PLUS</a>
+      </div>
+    </div>
+  </header>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+
+  <main id="main">
+    <section id="contact" class="contact section py-5">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title text-center">
+          <h2>Contactez-Nous</h2>
+          <div class="underline-bar"></div>
+          <p>
+            Vous avez des questions, un projet en tête ou besoin d'assistance ?
+            Remplissez le formulaire ci-dessous ou utilisez nos contacts directs.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Localisation :</h4>
+                <p>Cotonou, Bénin</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email :</h4>
+                <p>memegnonlewis@icloud.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Téléphone :</h4>
+                <p>+229 01 40 43 41 20</p>
+              </div>
+              
+              <a href="https://wa.me/2290140434120?text=Bonjour%2C%20je%20souhaiterais%20en%20savoir%20plus%20sur%20vos%20services." 
+                  class="whatsapp-btn" target="_blank" data-aos="zoom-in" data-aos-delay="100">
+                <i class="bi bi-whatsapp"></i> Contactez-nous sur WhatsApp
+              </a>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-7 mt-5 mt-lg-0">
+           <form action="" method="post" role="form" class="html-email-form" id="contact-form">
+             <p class="text-center text-muted mb-4">Nous vous répondrons sous 24h.</p>
+             
+             <div class="row">
+               <div class="col-md-6 form-group">
+                 <input type="text" name="name" class="form-control" id="name" placeholder="Votre Nom" required>
+               </div>
+               <div class="col-md-6 form-group">
+                <input type="text" class="form-control" name="email" id="whatsapp_number_field" placeholder="Votre Numéro WhatsApp" required>
+               </div>
+             </div>
+             <div class="form-group mt-3">
+               <input type="text" class="form-control" name="subject" id="subject" placeholder="Sujet" required>
+             </div>
+             <div class="form-group mt-3">
+               <textarea class="form-control" name="message" rows="5" placeholder="Message" id="userMessage" required></textarea> </div>
+             <div class="my-3" id="status-message">
+               </div>
+             <div class="text-center"><button type="submit">Envoyer le Message</button></div>
+           </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+      <div class="row text-center text-md-start">
+        
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">FlexiTech</h5>
+          <p>
+            FlexiTech vous accompagne dans la transformation numérique : sites web, dépannage, réseaux, logiciels et formation. Des solutions flexibles, accessibles et fiables.
+          </p>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Navigation</h5>
+          <p><a href="index.html" class="text-white text-decoration-none">Qui sommes-nous</a></p>
+          <p><a href="service.html" class="text-white text-decoration-none">Services</a></p>
+          <p><a href="tarifs.html" class="text-white text-decoration-none">Tarifs</a></p>
+          <p><a href="contact.html" class="text-white text-decoration-none">Contact</a></p>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+          <p><i class="bi bi-envelope-fill"></i> memegnonlewis@icloud.com</p>
+          <p><i class="bi bi-phone-fill"></i> +229 01 40 43 41 20</p>
+          <p><i class="bi bi-geo-alt-fill"></i> Cotonou, Bénin</p>
+        </div>
+
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Suivez-nous</h5>
+          <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-whatsapp fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-linkedin fs-4"></i></a>
+        </div>
+
+      </div>
+      <hr class="my-3 text-white" />
+      <div class="row text-center">
+        <div class="col">
+          <p class="mb-0">© 2025 FlexiTech. Tous droits réservés.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init(); // Initialiser AOS si vous l'utilisez
+
+        const form = document.getElementById('contact-form');
+        let statusDiv = document.getElementById('status-message');
+
+        // Votre numéro de téléphone WhatsApp (celui qui recevra les messages)
+        // Assurez-vous que c'est un numéro complet avec le code pays (ex: 229XXXXXXXX)
+        const whatsappNumber = '2290140434120'; 
+
+        // Vérification robuste et création de la div de statut si elle n'existe pas
+        if (!statusDiv) {
+            console.warn("L'élément avec l'ID 'status-message' n'a pas été trouvé. Création d'un élément de secours.");
+            const tempDiv = document.createElement('div');
+            tempDiv.id = 'status-message';
+            form.parentNode.insertBefore(tempDiv, form.nextSibling); 
+            statusDiv = tempDiv; 
+        }
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // EMPÊCHE LE COMPORTEMENT PAR DÉFAUT (LA REDIRECTION)
+
+            statusDiv.innerHTML = '<div class="alert alert-info">Préparation du message...</div>';
+
+            // Récupérer les références des éléments et vérifier s'ils existent
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('whatsapp_number_field');
+            const subjectInput = document.getElementById('subject');
+            const messageInput = document.getElementById('userMessage'); // ID mis à jour ici
+
+            if (!nameInput || !phoneInput || !subjectInput || !messageInput) {
+                statusDiv.innerHTML = '<div class="alert alert-danger">Erreur: Un ou plusieurs champs du formulaire sont introuvables. Vérifiez la console pour plus de détails.</div>';
+                console.error("Un ou plusieurs éléments du formulaire sont introuvables. Veuillez vérifier l'ID des éléments HTML dans le fichier contact.html :", {
+                    nameElement: nameInput,
+                    whatsappNumberElement: phoneInput,
+                    subjectElement: subjectInput,
+                    messageElement: messageInput // L'objet affichera maintenant 'userMessage'
+                });
+                return; // Arrêter l'exécution si les éléments ne sont pas trouvés
+            }
+
+            const name = nameInput.value.trim();
+            const phone = phoneInput.value.trim(); 
+            const subject = subjectInput.value.trim();
+            const messageBody = messageInput.value.trim();
+
+            // Validation simple côté client
+            if (name === '' || phone === '' || subject === '' || messageBody === '') {
+                statusDiv.innerHTML = '<div class="alert alert-danger">Veuillez remplir tous les champs du formulaire.</div>';
+                return; // Arrêter l'exécution si les champs sont vides
+            }
+
+            // Construire le message pour WhatsApp
+            const whatsappMessage = `Nouveau message de contact FlexiTech :\n\nNom: ${name}\nContact: ${phone}\nSujet: ${subject}\nMessage:\n${messageBody}`;
+
+            // Encoder le message pour l'URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+
+            // Construire le lien WhatsApp
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            try {
+                // Ouvre le lien dans un nouvel onglet
+                window.open(whatsappLink, '_blank');
+                statusDiv.innerHTML = '<div class="alert alert-success">Votre message est prêt sur WhatsApp.</div>';
+                form.reset(); // Réinitialise tous les champs du formulaire
+            } catch (error) {
+                console.error('Erreur lors de l\'ouverture du lien WhatsApp:', error);
+                statusDiv.innerHTML = '<div class="alert alert-danger">Une erreur est survenue lors de l\'ouverture de WhatsApp. Veuillez réessayer.</div>';
+            }
+        });
+    });
+  </script>
+
+</body>
+</html>
