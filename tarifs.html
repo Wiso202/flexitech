@@ -227,6 +227,24 @@
         color: var(--flexitech-yellow);
         margin-top: auto;
     }
+
+    /* Style pour la section "Bientôt disponible" */
+    .coming-soon-message {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      margin: 30px 0;
+      color: #555;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: 2px dashed #ccc;
+    }
+    .coming-soon-message i {
+        font-size: 3rem;
+        color: var(--flexitech-yellow);
+        margin-bottom: 15px;
+    }
     
     /* Ajustements responsive */
     @media (max-width: 768px) {
@@ -407,16 +425,6 @@
       </div>
     </div>
   </header>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
-    window.addEventListener('scroll', function () {
-      const navbar = document.querySelector('.navbar');
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
-  </script>
   <main id="main">
     <section id="tarifs" class="pricing section py-5">
       <div class="container" data-aos="fade-up">
@@ -448,7 +456,7 @@
                 <li class="na"><i class="bi bi-x-circle-fill"></i> Création site web vitrine</li>
                 <li class="na"><i class="bi bi-x-circle-fill"></i> Support technique étendu</li>
               </ul>
-              <a href="#" class="buy-btn">Choisir ce pack</a>
+              <button class="buy-btn" data-bs-toggle="modal" data-bs-target="#whatsappModal" data-package-name="Pack Start">Choisir ce pack</button>
             </div>
           </div><div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
             <div class="box">
@@ -461,7 +469,7 @@
                 <li><i class="bi bi-check-circle-fill"></i> Sécurité site + certificat SSL offert</li>
                 <li class="na"><i class="bi bi-x-circle-fill"></i> Support technique étendu</li>
               </ul>
-              <a href="#" class="buy-btn">Choisir ce pack</a>
+              <button class="buy-btn" data-bs-toggle="modal" data-bs-target="#whatsappModal" data-package-name="Pack Entrepreneur">Choisir ce pack</button>
             </div>
           </div><div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
@@ -475,7 +483,7 @@
                 <li><i class="bi bi-check-circle-fill"></i> Optimisation pour moteurs de recherche (SEO de base)</li>
                 <li><i class="bi bi-check-circle-fill"></i> Support technique pendant 3 mois</li>
               </ul>
-              <a href="#" class="buy-btn">Choisir ce pack</a>
+              <button class="buy-btn" data-bs-toggle="modal" data-bs-target="#whatsappModal" data-package-name="Pack Premium Entreprise">Choisir ce pack</button>
             </div>
           </div></div>
 
@@ -669,27 +677,10 @@
             </h2>
             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#servicesAccordion">
               <div class="accordion-body">
-                <div class="service-cards-grid">
-                    <div class="service-card">
-                        <i class="bi bi-cloud-arrow-up-fill card-icon"></i>
-                        <div class="card-title">Hébergement de site (1 an)</div>
-                        <div class="card-price">15 000 – 30 000 FCFA</div>
-                    </div>
-                    <div class="service-card">
-                        <i class="bi bi-globe2 card-icon"></i>
-                        <div class="card-title">Nom de domaine (1 an)</div>
-                        <div class="card-price">10 000 – 15 000 FCFA</div>
-                    </div>
-                    <div class="service-card">
-                        <i class="bi bi-hdd-stack-fill card-icon"></i>
-                        <div class="card-title">Sauvegarde Cloud & automatisation</div>
-                        <div class="card-price">10 000 – 25 000 FCFA</div>
-                    </div>
-                    <div class="service-card">
-                        <i class="bi bi-microsoft card-icon"></i>
-                        <div class="card-title">Migration Google Workspace / Microsoft 365</div>
-                        <div class="card-price">15 000 – 40 000 FCFA</div>
-                    </div>
+                <div class="coming-soon-message">
+                  <i class="bi bi-cloud-slash-fill"></i>
+                  <p>Cette section est bientôt disponible !</p>
+                  <p>Revenez nous voir bientôt pour découvrir nos offres de services Cloud et Web.</p>
                 </div>
               </div>
             </div>
@@ -703,27 +694,10 @@
             </h2>
             <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#servicesAccordion">
               <div class="accordion-body">
-                <div class="service-cards-grid">
-                    <div class="service-card">
-                        <i class="bi bi-book-half card-icon"></i>
-                        <div class="card-title">Initiation à l’informatique (1h à 2h)</div>
-                        <div class="card-price">5 000 – 10 000 FCFA</div>
-                    </div>
-                    <div class="service-card">
-                        <i class="bi bi-tools card-icon"></i>
-                        <div class="card-title">Formation logiciel spécifique (Word, Excel, etc.)</div>
-                        <div class="card-price">10 000 – 20 000 FCFA</div>
-                    </div>
-                    <div class="service-card">
-                        <i class="bi bi-search card-icon"></i>
-                        <div class="card-title">Audit informatique PME</div>
-                        <div class="card-price">15 000 – 30 000 FCFA</div>
-                    </div>
-                    <div class="service-card">
-                        <i class="bi bi-person-badge card-icon"></i>
-                        <div class="card-title">Sensibilisation cybersécurité (par groupe)</div>
-                        <div class="card-price">20 000 – 50 000 FCFA</div>
-                    </div>
+                <div class="coming-soon-message">
+                  <i class="bi bi-mortarboard-fill"></i>
+                  <p>Cette section est bientôt disponible !</p>
+                  <p>Nos programmes de formations et de conseils seront bientôt prêts pour vous accompagner.</p>
                 </div>
               </div>
             </div>
@@ -779,6 +753,29 @@
     </div>
   </footer>
 
+    <div class="modal fade" id="whatsappModal" tabindex="-1" aria-labelledby="whatsappModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="whatsappModalLabel">Contactez-nous pour ce pack</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Pour confirmer votre intérêt pour le pack <strong id="packageNameInModal"></strong>, veuillez entrer votre numéro de téléphone (WhatsApp) afin que nous puissions vous contacter.</p>
+                    <div class="mb-3">
+                        <label for="whatsappNumber" class="form-label">Votre numéro de téléphone :</label>
+                        <input type="tel" class="form-control" id="whatsappNumber" placeholder="+229 XXXXXXXX" required>
+                    </div>
+                    <small class="text-muted">Nous vous enverrons un message sur WhatsApp pour plus de détails.</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="sendWhatsappMessage">Envoyer via WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
@@ -788,6 +785,53 @@
       if (navbar) {
         navbar.classList.toggle('scrolled', window.scrollY > 50);
       }
+    });
+
+    // JavaScript pour le modal WhatsApp
+    document.addEventListener('DOMContentLoaded', function() {
+        const whatsappModal = document.getElementById('whatsappModal');
+        whatsappModal.addEventListener('show.bs.modal', function (event) {
+            // Bouton qui a déclenché le modal
+            const button = event.relatedTarget;
+            // Récupère le nom du pack depuis l'attribut data-package-name
+            const packageName = button.getAttribute('data-package-name');
+            // Met à jour le contenu du modal
+            const modalBodyInput = whatsappModal.querySelector('#packageNameInModal');
+            modalBodyInput.textContent = packageName;
+
+            // Stocke le nom du pack pour l'utiliser lors de l'envoi du message
+            whatsappModal.dataset.currentPackageName = packageName;
+        });
+
+        document.getElementById('sendWhatsappMessage').addEventListener('click', function() {
+            const phoneNumber = document.getElementById('whatsappNumber').value;
+            const packageName = whatsappModal.dataset.currentPackageName;
+            const flexiTechNumber = '2290140434120'; // Votre numéro WhatsApp
+
+            if (phoneNumber) {
+                // Formater le numéro de l'utilisateur pour WhatsApp (ex: retirer les espaces, etc.)
+                const cleanedPhoneNumber = phoneNumber.replace(/\s/g, '');
+                
+                // Message à envoyer
+                const message = encodeURIComponent(`Bonjour FlexiTech, je suis intéressé(e) par le "${packageName}". Mon numéro est le ${cleanedPhoneNumber}.`);
+                
+                // URL WhatsApp
+                const whatsappUrl = `https://wa.me/${flexiTechNumber}?text=${message}`;
+                
+                // Ouvrir WhatsApp
+                window.open(whatsappUrl, '_blank');
+                
+                // Fermer le modal
+                const modal = bootstrap.Modal.getInstance(whatsappModal);
+                modal.hide();
+                
+                // Optionnel: Réinitialiser le champ du numéro
+                document.getElementById('whatsappNumber').value = '';
+
+            } else {
+                alert('Veuillez entrer votre numéro de téléphone.');
+            }
+        });
     });
   </script>
 </body>
