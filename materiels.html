@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexiTech - Matériels</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Styles généraux repris de service.html */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      color: white;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('fonds.jpeg') center/cover no-repeat;
+      background-size: cover;
+      z-index: 1;
+    }
+    header .container {
+      z-index: 2;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: transparent;
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+    .navbar.scrolled {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff;
+    }
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin-right: 15px;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ffc107 !important;
+    }
+    h1.display-4 {
+      font-weight: 700;
+      font-size: 3.5rem;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    p.lead {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    .header-btns .btn {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 30px;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Styles spécifiques pour la section Matériels */
+    .materiels-section {
+      background-color: #f8f9fa;
+      padding-top: 60px;
+      padding-bottom: 60px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .materiels-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #212529;
+    }
+
+    .underline-bar {
+      width: 100px;
+      height: 5px;
+      background-color: #ffc107;
+      border-radius: 3px;
+    }
+
+    .materiel-item-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 25px; /* Espace entre les cartes */
+    }
+
+    .materiel-item-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    .materiel-item-card img {
+      max-width: 100%;
+      height: 180px; /* Hauteur fixe pour les images */
+      object-fit: contain; /* Garde les proportions et s'assure que l'image est entièrement visible */
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .materiel-item-card .title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #212529;
+    }
+
+    .materiel-item-card .price {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffc107;
+      margin-bottom: 10px;
+    }
+
+    .materiel-item-card .short-characteristics {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      flex-grow: 1; /* Permet à la description de prendre de la place */
+    }
+
+    .materiel-item-card .btn-group .btn {
+      margin: 5px;
+      width: auto;
+      padding: 8px 20px;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .materiel-item-card .btn-buy {
+      background-color: #ffc107;
+      border-color: #ffc107;
+      color: #fff;
+    }
+
+    .materiel-item-card .btn-buy:hover {
+      background-color: #e0a800;
+      border-color: #e0a800;
+      transform: translateY(-2px);
+    }
+
+    .materiel-item-card .btn-details {
+      background-color: #212529;
+      border-color: #212529;
+      color: #fff;
+    }
+
+    .materiel-item-card .btn-details:hover {
+      background-color: #343a40;
+      border-color: #343a40;
+      transform: translateY(-2px);
+    }
+
+    /* Styles pour la pagination */
+    .pagination .page-link {
+      color: #212529;
+      border-color: #dee2e6;
+    }
+    .pagination .page-item.active .page-link {
+      background-color: #ffc107;
+      border-color: #ffc107;
+      color: #fff;
+    }
+    .pagination .page-link:hover {
+      color: #ffc107;
+    }
+
+    /* Modal styles pour les détails complets (pop-up) */
+    .modal-content {
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .modal-header {
+      background-color: #ffc107;
+      color: #fff;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      border-bottom: none;
+    }
+    .modal-header .btn-close {
+      filter: invert(1) grayscale(100%) brightness(200%); /* Rend l'icône blanche */
+    }
+    .modal-title {
+      font-weight: 700;
+    }
+    .modal-body ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .modal-body ul li {
+      margin-bottom: 8px;
+      color: #495057;
+    }
+    .modal-body ul li strong {
+      color: #212529;
+    }
+
+    /* Styles pour le Footer */
+    .footer a:hover {
+      color: #ffc107 !important;
+      transition: 0.3s;
+    }
+
+    /* Accordion pour masquer/afficher les sections */
+    .accordion-item {
+      border: none;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .accordion-button {
+      background-color: #212529;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 600;
+      border-radius: 12px !important;
+      padding: 20px 25px;
+      transition: background-color 0.3s ease;
+    }
+    .accordion-button:not(.collapsed) {
+      background-color: #ffc107;
+      color: #212529;
+      box-shadow: none;
+    }
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: transparent;
+    }
+    .accordion-button::after {
+      filter: invert(1); /* Rend la flèche blanche par default */
+    }
+    .accordion-button:not(.collapsed)::after {
+      filter: none; /* Rétablit la couleur par défaut quand déplié */
+    }
+    .accordion-collapse {
+      border-top: 1px solid rgba(0,0,0,.125);
+    }
+    .accordion-body {
+      padding: 30px;
+    }
+
+    @media (max-width: 767.98px) {
+      .materiels-title {
+        font-size: 2rem;
+      }
+      .materiel-item-card .title {
+        font-size: 1.1rem;
+      }
+      .materiel-item-card .price {
+        font-size: 1rem;
+      }
+      .materiel-item-card img {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">FlexiTech</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="service.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tarifs.html">Grille tarifaire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="materiels.html">Matériels</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header id="accueil">
+    <div class="container">
+      <h1 class="display-4" data-aos="fade-down" data-aos-duration="1000">FLEXITECH</h1>
+      <p class="lead" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">L’informatique qui s’adapte à vos besoins</p>
+      <div class="header-btns" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+        <a href="contact.html" class="btn btn-warning">NOUS CONTACTER</a>
+        <a href="service.html" class="btn btn-outline-light">EN SAVOIR PLUS</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="materiels" class="materiels-section section py-5">
+    <div class="container text-center section-title" data-aos="fade-up">
+      <h2 class="materiels-title d-inline-block">Nos Matériels Disponibles</h2>
+      <div class="underline-bar mx-auto mb-4" data-aos="zoom-in" data-aos-delay="200"></div>
+      <p class="mx-auto" style="max-width:700px;" data-aos="fade-up" data-aos-delay="300">
+        Découvrez notre sélection d'ordinateurs et d'accessoires informatiques, alliant performance et fiabilité pour tous vos besoins.
+      </p>
+    </div>
+
+    <div class="container">
+      <div class="accordion" id="materielsAccordion">
+
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+          <h2 class="accordion-header" id="headingComputers">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComputers" aria-expanded="false" aria-controls="collapseComputers">
+              Ordinateurs
+            </button>
+          </h2>
+          <div id="collapseComputers" class="accordion-collapse collapse" aria-labelledby="headingComputers" data-bs-parent="#materielsAccordion">
+            <div class="accordion-body">
+              <div class="row gy-4" id="computer-list">
+                </div>
+              <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center" id="computer-pagination">
+                  </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="accordion-header" id="headingAccessories">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAccessories" aria-expanded="false" aria-controls="collapseAccessories">
+              Accessoires d'ordinateurs
+            </button>
+          </h2>
+          <div id="collapseAccessories" class="accordion-collapse collapse" aria-labelledby="headingAccessories" data-bs-parent="#materielsAccordion">
+            <div class="accordion-body">
+              <div class="row gy-4" id="accessory-list">
+                </div>
+              <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center" id="accessory-pagination">
+                  </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="computerDetailsModal" tabindex="-1" aria-labelledby="computerDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="computerDetailsModalLabel">Détails de l'ordinateur</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4 id="modal-computer-name"></h4>
+          <p class="text-muted" id="modal-computer-price"></p>
+          <img id="modal-computer-image" src="" alt="Image de l'ordinateur" class="img-fluid mb-3">
+          <h5>Caractéristiques complètes :</h5>
+          <ul id="modal-computer-full-specs">
+            </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <a id="modal-computer-buy-link" href="#" class="btn btn-buy">Acheter cet ordinateur</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+      <div class="row text-center text-md-start">
+
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">FlexiTech</h5>
+          <p>
+            FlexiTech vous accompagne dans la transformation numérique : sites web, dépannage, réseaux, logiciels et formation. Des solutions flexibles, accessibles et fiables.
+          </p>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Navigation</h5>
+          <p><a href="index.html" class="text-white text-decoration-none">Qui sommes-nous</a></p>
+          <p><a href="service.html" class="text-white text-decoration-none">Services</a></p>
+          <p><a href="tarifs.html" class="text-white text-decoration-none">Tarifs</a></p>
+          <p><a href="contact.html" class="text-white text-decoration-none">Contact</a></p>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+          <p><i class="bi bi-envelope-fill"></i> memegnonlewis@icloud.com</p>
+          <p><i class="bi bi-phone-fill"></i> +229 01 40 43 41 20</p>
+          <p><i class="bi bi-geo-alt-fill"></i> Cotonou, Bénin</p>
+        </div>
+
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Suivez-nous</h5>
+          <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-whatsapp fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-linkedin fs-4"></i></a>
+        </div>
+
+      </div>
+      <hr class="my-3 text-white" />
+      <div class="row text-center">
+        <div class="col">
+          <p class="mb-0">© 2025 FlexiTech. Tous droits réservés.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Données des ordinateurs
+      const computers = [
+        {
+          id: 'comp1',
+          name: 'HP ProBook 6470b',
+          price: '65.000 XOF',
+          image: 'hp probook.jfif',
+          short_specs: 'Écran 14", Intel Core i5 3e Gen, HDD 250 Go, RAM 8 Go, Autonomie 3h.',
+          full_specs: [
+            'Modèle: HP ProBook 6470b',
+            'Écran: 14 pouces',
+            'Processeur: Intel Core i5 3ème génération',
+            'Stockage: HDD 250 Go',
+            'RAM: 8 Go',
+            'Autonomie: 3 heures'
+          ]
+        },
+        {
+          id: 'comp2',
+          name: 'Dell Inspiron 3190',
+          price: '80.000 XOF',
+          image: 'Dell Inspiron 3190.jfif',
+          short_specs: 'Écran 11", Intel Pentium Silver, SSD 128 Go, RAM 8 Go, Autonomie 5h.',
+          full_specs: [
+            'Modèle: Dell Inspiron 3190',
+            'Écran: 11 pouces',
+            'Processeur: Intel Pentium Silver',
+            'Stockage: SSD 128 Go',
+            'RAM: 8 Go',
+            'Autonomie: 5 heures'
+          ]
+        },
+        {
+          id: 'comp3',
+          name: 'Dell Latitude 3540',
+          price: '90.000 XOF',
+          image: 'Dell Latitude 3540.jfif',
+          short_specs: 'Écran 15.6" HD, Intel Core i3 4e Gen, HDD 500 Go, RAM 8 Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: Dell Latitude 3540',
+            'Écran: 15.6 pouces HD',
+            'Processeur: Intel Core i3 4ème génération',
+            'Stockage: HDD 500 Go',
+            'RAM: 8 Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp4',
+          name: 'Dell Inspiron 5537',
+          price: '100.000 XOF',
+          image: 'Dell Inspiron 5537.jfif',
+          short_specs: 'Écran 15.6" Tactile, Intel Core i3 4e Gen, HDD 500 Go, RAM 8 Go.',
+          full_specs: [
+            'Modèle: Dell Inspiron 5537',
+            'Écran: 15.6 pouces Tactile',
+            'Processeur: Intel Core i3 4ème génération',
+            'Stockage: HDD 500 Go',
+            'RAM: 8 Go'
+          ]
+        },
+        {
+          id: 'comp5',
+          name: 'Asus X5400',
+          price: '105.000 XOF',
+          image: 'Asus X5400.jfif',
+          short_specs: 'Écran 15.6" HD, Intel Core i3 6e Gen, HDD 500 Go, RAM 6 Go, Radeon R0, Autonomie 3h.',
+          full_specs: [
+            'Modèle: Asus X5400',
+            'Écran: 15.6 pouces HD',
+            'Processeur: Intel Core i3 6ème génération',
+            'Stockage: HDD 500 Go',
+            'RAM: 6 Go',
+            'Carte Graphique: Radeon R0',
+            'Autonomie: 3 heures'
+          ]
+        },
+        {
+          id: 'comp6',
+          name: 'Acer Aspire E1 572G',
+          price: '110.000 XOF',
+          image: 'Acer Aspire E1 572G.jfif',
+          short_specs: 'Écran 15.6", Intel Core i5 4e Gen, HDD 500 Go, RAM 8 Go, Radeon R7 M265 2Go, Autonomie 3h.',
+          full_specs: [
+            'Modèle: Acer Aspire E1 572G',
+            'Écran: 15.6 pouces',
+            'Processeur: Intel Core i5 4ème génération',
+            'Stockage: HDD 500 Go',
+            'RAM: 8 Go',
+            'Carte Graphique: Radeon R7 M265 2Go',
+            'Autonomie: 3 heures'
+          ]
+        },
+        {
+          id: 'comp7',
+          name: 'Dell Inspiron 5559',
+          price: '115.000 XOF',
+          image: 'Dell Inspiron 5559.jfif',
+          short_specs: 'Écran 15.6" Full HD, Intel Core i3 7e Gen, HDD 1 To, RAM 6 Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: Dell Inspiron 5559',
+            'Écran: 15.6 pouces Full HD',
+            'Processeur: Intel Core i3 7ème génération',
+            'Stockage: HDD 1 To',
+            'RAM: 6 Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp8',
+          name: 'Dell Latitude (Tactile)',
+          price: '110.000 XOF',
+          image: 'Dell Latitude (Tactile).jfif',
+          short_specs: 'Écran 14" Tactile, Intel Core i5 4e Gen, HDD 750 Go, RAM 8 Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: Dell Latitude',
+            'Écran: 14 pouces Tactile',
+            'Processeur: Intel Core i5 4ème génération',
+            'Stockage: HDD 750 Go',
+            'RAM: 8 Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp9',
+          name: 'Acer Aspire E5 553',
+          price: '120.000 XOF',
+          image: 'Acer Aspire E5 553.jfif',
+          short_specs: 'Écran 15.6" Full HD, Quad Core A10-9700P, SSD 128 Go + HDD 500 Go, RAM 8 Go, Radeon R7 M340 2Go, Autonomie 2h.',
+          full_specs: [
+            'Modèle: Acer Aspire E5 553',
+            'Écran: 15.6 pouces Full HD',
+            'Processeur: Quad Core A10-9700P',
+            'Stockage: SSD 128 Go + HDD 500 Go',
+            'RAM: 8 Go',
+            'Carte Graphique: Radeon R7 M340 2Go',
+            'Autonomie: 2 heures'
+          ]
+        },
+        {
+          id: 'comp10',
+          name: 'Dell Latitude 7480',
+          price: '135.000 XOF',
+          image: 'Dell Latitude 7480.jfif',
+          short_specs: 'Écran 14" Full HD, Intel Core i5 7e Gen, SSD 256 Go, RAM 8 Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: Dell Latitude 7480',
+            'Écran: 14 pouces Full HD',
+            'Processeur: Intel Core i5 7ème génération',
+            'Stockage: SSD 256 Go',
+            'RAM: 8 Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp11',
+          name: 'Lenovo ThinkPad X260',
+          price: '145.000 XOF',
+          image: 'Lenovo ThinkPad X260.jfif',
+          short_specs: 'Écran 12.5" Full HD, Intel Core i7 6e Gen, SSD 256 Go, RAM 8 Go, Double Batterie.',
+          full_specs: [
+            'Modèle: Lenovo ThinkPad X260',
+            'Écran: 12.5 pouces Full HD',
+            'Processeur: Intel Core i7 6ème génération',
+            'Stockage: SSD 256 Go',
+            'RAM: 8 Go',
+            'Batterie: Double batterie'
+          ]
+        },
+        {
+          id: 'comp12',
+          name: 'Lenovo ThinkPad X13',
+          price: 'Non spécifié', // Prix non fourni dans la description
+          image: 'Lenovo ThinkPad X13.jfif',
+          short_specs: 'Écran 13.3" Full HD, Intel Core i5 10e Gen, Autonomie 4h.',
+          full_specs: [
+            'Modèle: Lenovo ThinkPad X13',
+            'Écran: 13.3 pouces Full HD',
+            'Processeur: Intel Core i5 10ème génération',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp13',
+          name: 'HP EliteBook 840 G5',
+          price: '185.000 XOF',
+          image: 'HP EliteBook 840 G5.jfif',
+          short_specs: 'Écran 10.0" Full HD, Intel Core i5 6e Gen, SSD 256 Go, RAM 8 Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: HP EliteBook 840 G5',
+            'Écran: 10.0 pouces Full HD',
+            'Processeur: Intel Core i5 6ème génération',
+            'Stockage: SSD 256 Go',
+            'RAM: 8 Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp14',
+          name: 'Dell Latitude 5510',
+          price: '195.000 XOF',
+          image: 'Dell Latitude 5510.jfif',
+          short_specs: 'Écran 15.6" Full HD, Intel Core i5 10e Gen, SSD 256 Go, RAM 16 Go, Autonomie 5h.',
+          full_specs: [
+            'Modèle: Dell Latitude 5510',
+            'Écran: 15.6 pouces Full HD',
+            'Processeur: Intel Core i5 10ème génération',
+            'Stockage: SSD 256 Go',
+            'RAM: 16 Go',
+            'Autonomie: 5 heures'
+          ]
+        },
+        {
+          id: 'comp15',
+          name: 'Samsung 9 Pro NP940Z5L',
+          price: '210.000 XOF',
+          image: 'Samsung 9 Pro NP940Z5L.jfif',
+          short_specs: 'Écran 15.6" 4K Tactile, Intel Core i7 6e Gen, SSD 256 Go, RAM 8 Go, Nvidia GTX 950M 2Go.',
+          full_specs: [
+            'Modèle: Samsung 9 Pro NP940Z5L',
+            'Écran: 15.6 pouces 4K Tactile',
+            'Processeur: Intel Core i7 6ème génération',
+            'Stockage: SSD 256 Go',
+            'RAM: 8 Go',
+            'Carte Graphique: Nvidia GTX 950M 2Go'
+          ]
+        },
+        {
+          id: 'comp16',
+          name: 'HP ProBook 430 G7',
+          price: '220.000 XOF',
+          image: 'HP ProBook 430 G7.jfif',
+          short_specs: 'Écran 13" Full HD, Intel i5 10e Gen, SSD 165 Go, RAM 8 Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: HP ProBook 430 G7',
+            'Écran: 13 pouces Full HD',
+            'Processeur: Intel Core i5 10ème génération',
+            'Stockage: SSD 165 Go',
+            'RAM: 8 Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp17',
+          name: 'HP Pavilion 14 ce1073tx',
+          price: 'Non spécifié', // Prix non fourni
+          image: 'HP Pavilion 14 ce1073tx.jfif',
+          short_specs: 'Écran 14" Full HD, Intel Core i5 8e Gen, SSD 256 Go, RAM 8 Go, Nvidia MX150 2Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: HP Pavilion 14 ce1073tx',
+            'Écran: 14 pouces Full HD',
+            'Processeur: Intel Core i5 8ème génération',
+            'Stockage: SSD 256 Go',
+            'RAM: 8 Go',
+            'Carte Graphique: Nvidia MX150 2Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp18',
+          name: 'HP Pavilion 13 an1025tu',
+          price: '225.000 XOF',
+          image: 'HP Pavilion 13 an1025tu.jfif',
+          short_specs: 'Écran 13" Full HD, Intel Core i5 10e Gen, SSD 512 Go, RAM 8 Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: HP Pavilion 13 an1025tu',
+            'Écran: 13 pouces Full HD',
+            'Processeur: Intel Core i5 10ème génération',
+            'Stockage: SSD 512 Go',
+            'RAM: 8 Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp19',
+          name: 'HP Pavilion 15 dw2795wm',
+          price: '350.000 XOF',
+          image: 'HP Pavilion 15 dw2795wm.jfif',
+          short_specs: 'Écran 15.6" Full HD, Intel Core i7 11e Gen, SSD 512 Go, RAM 16 Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: HP Pavilion 15 dw2795wm',
+            'Écran: 15.6 pouces Full HD',
+            'Processeur: Intel Core i7 11ème génération',
+            'Stockage: SSD 512 Go',
+            'RAM: 16 Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp20',
+          name: 'HP Pavilion 14s dr5014tu',
+          price: '375.000 XOF',
+          image: 'HP Pavilion 14s dr5014tu.jfif',
+          short_specs: 'Écran 14" Full HD, Intel Core i7 12e Gen, SSD 512 Go, RAM 16 Go, Autonomie 4h.',
+          full_specs: [
+            'Modèle: HP Pavilion 14s dr5014tu',
+            'Écran: 14 pouces Full HD',
+            'Processeur: Intel Core i7 12ème génération',
+            'Stockage: SSD 512 Go',
+            'RAM: 16 Go',
+            'Autonomie: 4 heures'
+          ]
+        },
+        {
+          id: 'comp21',
+          name: 'HP Envy 15 x360',
+          price: '470.000 XOF',
+          image: 'HP Envy 15 x360.jfif',
+          short_specs: 'Écran 15.6" x360 Tactile, Intel Core i7 11e Gen, SSD 1 To, RAM 32 Go, Empreinte Digitale, Autonomie 4h.',
+          full_specs: [
+            'Modèle: HP Envy 15 x360',
+            'Écran: 15.6 pouces x360 Tactile',
+            'Processeur: Intel Core i7 11ème génération',
+            'Stockage: SSD 1 To',
+            'RAM: 32 Go',
+            'Fonctionnalités: Lecteur d\'empreinte digitale',
+            'Autonomie: 4 heures'
+          ]
+        }
+      ];
+
+      // Données des accessoires
+      const accessories = [
+        {
+          id: 'acc1',
+          name: 'Souris filaire HP x500',
+          price: '2.500 XOF',
+          image: 'Souris filaire HP x500.jfif',
+          short_specs: 'Souris filaire, design ergonomique.'
+        },
+        {
+          id: 'acc2',
+          name: 'Souris filaire HP M10',
+          price: '2.500 XOF',
+          image: 'Souris filaire HP M10.jfif',
+          short_specs: 'Souris filaire compacte, précision fiable.'
+        },
+        {
+          id: 'acc3',
+          name: 'Clé Bluetooth 4.0',
+          price: '3.500 XOF',
+          image: 'Clé Bluetooth 4.0.jfif',
+          short_specs: 'Permet la connectivité Bluetooth sur PC.'
+        },
+        {
+          id: 'acc4',
+          name: 'Clé Bluetooth 5.0',
+          price: '3.500 XOF',
+          image: 'Clé Bluetooth 5.0.jfif',
+          short_specs: 'Connectivité Bluetooth rapide et stable.'
+        },
+        {
+          id: 'acc5',
+          name: 'Clavier + souris Gamer rechargeables',
+          price: '19.000 XOF',
+          image: 'Clavier + souris Gamer rechargeables.jfif',
+          short_specs: 'Ensemble sans fil, idéal pour le gaming.'
+        },
+        {
+          id: 'acc6',
+          name: 'Boitier WD 3.0',
+          price: '4.500 XOF',
+          image: 'Boitier WD 3.0.jfif',
+          short_specs: 'Boîtier externe pour disque dur, USB 3.0.'
+        },
+        {
+          id: 'acc7',
+          name: 'Tapis souris',
+          price: '1.500 XOF',
+          image: 'Tapis souris.jfif',
+          short_specs: 'Surface lisse pour une glisse optimale.'
+        },
+        {
+          id: 'acc8',
+          name: 'Pâte thermique',
+          price: '2.500 XOF',
+          image: 'Pâte thermique.jfif',
+          short_specs: 'Améliore le refroidissement des composants.'
+        },
+        {
+          id: 'acc9',
+          name: 'Souris sans fil DELL',
+          price: '4.500 XOF',
+          image: 'Souris sans fil DELL.jfif',
+          short_specs: 'Souris sans fil fiable et confortable.'
+        },
+        {
+          id: 'acc10',
+          name: 'Stand PC avec refroidisseur',
+          price: '8.000 XOF',
+          image: 'Stand PC avec refroidisseur.jfif',
+          short_specs: 'Support ventilé pour éviter la surchauffe.'
+        },
+        {
+          id: 'acc11',
+          name: 'Multi ports USB 3.0 (7 PORTS)',
+          price: '5.000 XOF',
+          image: 'Multi ports USB 3.0 (7 PORTS).jfif',
+          short_specs: 'Ajoute 7 ports USB 3.0 rapides.'
+        },
+        {
+          id: 'acc12',
+          name: 'Multi ports USB 2.0 (8 PORTS)',
+          price: '5.000 XOF',
+          image: 'Multi ports USB 2.0 (8 PORTS).jfif',
+          short_specs: '8 ports USB 2.0 pour vos périphériques.'
+        },
+        {
+          id: 'acc13',
+          name: 'Multi ports USB 3.0 (4 PORTS)',
+          price: '4.000 XOF',
+          image: 'Multi ports USB 3.0 (4 PORTS).jfif',
+          short_specs: 'Hub compact avec 4 ports USB 3.0.'
+        },
+        {
+          id: 'acc14',
+          name: 'Câble HDMI < 3M',
+          price: '3.500 XOF',
+          image: 'Câble HDMI -3M',
+          short_specs: 'Câble HDMI court pour connexions proches.'
+        },
+        {
+          id: 'acc15',
+          name: 'Câble HDMI 3 M',
+          price: '4.500 XOF',
+          image: 'Câble HDMI 3 M.jfif',
+          short_specs: 'Câble HDMI standard de 3 mètres.'
+        },
+        {
+          id: 'acc16',
+          name: 'Câble HDMI 5 M',
+          price: '6.000 XOF',
+          image: 'Câble HDMI 5 M.jfif',
+          short_specs: 'Câble HDMI de 5 mètres pour plus de flexibilité.'
+        },
+        {
+          id: 'acc17',
+          name: 'Câble HDMI 10 M',
+          price: '9.000 XOF',
+          image: 'Câble HDMI 10 M.jfif',
+          short_specs: 'Long câble HDMI de 10 mètres.'
+        },
+        {
+          id: 'acc18',
+          name: 'Câble HDMI 15 M',
+          price: '10.000 XOF',
+          image: 'Câble HDMI 15 M.jfif',
+          short_specs: 'Très long câble HDMI de 15 mètres.'
+        },
+        {
+          id: 'acc19',
+          name: 'Câble HDMI 20 M',
+          price: '14.000 XOF',
+          image: 'Câble HDMI 20 M.jfif',
+          short_specs: 'Câble HDMI de 20 mètres, idéal pour grandes distances.'
+        },
+        {
+          id: 'acc20',
+          name: 'Câble HDMI 30 M',
+          price: '18.000 XOF',
+          image: 'Câble HDMI 30 M.jfif',
+          short_specs: 'Câble HDMI professionnel de 30 mètres.'
+        },
+        {
+          id: 'acc21',
+          name: 'Répétiteurs HDMI 4 Ports 4K',
+          price: '10.000 XOF',
+          image: 'Répétiteurs HDMI 4 Ports 4K.jfif',
+          short_specs: 'Permet de connecter plusieurs écrans 4K.'
+        },
+        {
+          id: 'acc22',
+          name: 'Souris a fil GAMING HP M100',
+          price: '35.000 XOF',
+          image: 'Souris a fil GAMING HP M100.jfif',
+          short_specs: 'Souris gaming filaire haute précision.'
+        },
+        {
+          id: 'acc23',
+          name: 'Petite WEBCAM pour Desktop ou Laptop',
+          price: '5.000 XOF',
+          image: 'Petite WEBCAM pour Desktop ou Laptop.jfif',
+          short_specs: 'Webcam compacte pour visioconférence.'
+        },
+        {
+          id: 'acc24',
+          name: 'Grande WEBCAM HD pour Desktop',
+          price: '10.000 XOF',
+          image: 'Grande WEBCAM HD pour Desktop.jfif',
+          short_specs: 'Webcam HD pour une meilleure qualité d\'image.'
+        },
+        {
+          id: 'acc25',
+          name: 'STYLET Universel',
+          price: '9.000 XOF',
+          image: 'STYLET Universel.jfif',
+          short_specs: 'Compatible avec la plupart des écrans tactiles.'
+        },
+        {
+          id: 'acc26',
+          name: 'STAND+REFROIDISSEUR PC ROTATIF V4.1',
+          price: '20.500 XOF',
+          image: 'STAND+REFROIDISSEUR PC ROTATIF V4.1.jfif',
+          short_specs: 'Support PC rotatif avec ventilateur intégré.'
+        },
+        {
+          id: 'acc27',
+          name: 'CLAVIER et SOURIS SANS FIL KO6 LONGS',
+          price: '10.000 XOF',
+          image: 'CLAVIER et SOURIS SANS FIL KO6 LONGS.jfif',
+          short_specs: 'Ensemble clavier/souris sans fil avec longue portée.'
+        },
+        {
+          id: 'acc28',
+          name: 'CLAVIER et SOURIS SANS FIL KO3 court',
+          price: '9.500 XOF',
+          image: 'CLAVIER et SOURIS SANS FIL KO3 court.jfif',
+          short_specs: 'Ensemble clavier/souris sans fil compact.'
+        },
+        {
+          id: 'acc29',
+          name: 'STAND+REFROIDISSEUR pour PC ROTATIF V5.1',
+          price: '20.000 XOF',
+          image: 'STAND+REFROIDISSEUR pour PC ROTATIF V5.1.jfif',
+          short_specs: 'Support PC rotatif amélioré avec refroidissement.'
+        },
+        {
+          id: 'acc30',
+          name: 'STAND SIMPLE pour PC',
+          price: '4.000 XOF',
+          image: 'STAND SIMPLE pour PC.jfif',
+          short_specs: 'Support basique pour surélever votre PC.'
+        },
+        {
+          id: 'acc31',
+          name: 'BOÎTIER SSD type C M.2',
+          price: '10.000 XOF',
+          image: 'BOÎTIER SSD type C M.2.jfif',
+          short_specs: 'Convertit un SSD M.2 en disque externe USB-C.'
+        },
+        {
+          id: 'acc32',
+          name: 'CLAVIER filaire LONGS',
+          price: '5.000 XOF',
+          image: 'CLAVIER filaire LONGS.jfif',
+          short_specs: 'Clavier filaire avec un long câble.'
+        },
+        {
+          id: 'acc33',
+          name: 'BOÎTIER SSD 3.0',
+          price: '8.500 XOF',
+          image: 'BOÎTIER SSD 3.0.jfif',
+          short_specs: 'Boîtier externe pour SSD, compatible USB 3.0.'
+        },
+        {
+          id: 'acc34',
+          name: 'SSD SATA 512GB',
+          price: '25.000 XOF',
+          image: 'SSD SATA 512GB.jfif',
+          short_specs: 'Disque SSD rapide de 512 Go.'
+        },
+        {
+          id: 'acc35',
+          name: 'SSD M2 512GB',
+          price: '27.000 XOF',
+          image: 'SSD M2 512GB.jfif',
+          short_specs: 'SSD M.2 compact et performant de 512 Go.'
+        },
+        {
+          id: 'acc36',
+          name: 'SSD SATA 1TB',
+          price: '39.000 XOF',
+          image: 'SSD SATA 1TB.jfif',
+          short_specs: 'Disque SSD SATA de 1 To pour un grand stockage.'
+        },
+        {
+          id: 'acc37',
+          name: 'SSD M2 1TB',
+          price: '43.000 XOF',
+          image: 'SSD M2 1TB.jfif',
+          short_specs: 'SSD M.2 de 1 To, ultra-rapide.'
+        },
+        {
+          id: 'acc38',
+          name: 'ADAPTATEUR TYPE-C (8-EN-1) avec VGA',
+          price: '12.000 XOF',
+          image: 'ADAPTATEUR TYPE-C (8-EN-1) avec VGA.jfif',
+          short_specs: 'Multi-adaptateur USB-C avec port VGA.'
+        },
+        {
+          id: 'acc39',
+          name: 'ADAPTATEUR TYPE-C (8-EN-1) sans VGA',
+          price: '13.000 XOF',
+          image: 'ADAPTATEUR TYPE-C (8-EN-1) sans VGA.jfif',
+          short_specs: 'Hub USB-C polyvalent sans port VGA.'
+        },
+        {
+          id: 'acc40',
+          name: 'ADAPTATEUR HUB TYPE-C (10-EN-1)',
+          price: '13.500 XOF',
+          image: 'ADAPTATEUR HUB TYPE-C (10-EN-1).jfif',
+          short_specs: 'Hub USB-C 10 en 1 pour toutes vos connexions.'
+        }
+      ];
+
+      const itemsPerPage = 6; // Nombre d'articles par page
+
+      function renderItems(containerId, items, page, isComputer = false) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedItems = items.slice(start, end);
+
+        paginatedItems.forEach((item, index) => {
+          const col = document.createElement('div');
+          col.classList.add('col-lg-4', 'col-md-6');
+          col.setAttribute('data-aos', 'fade-up');
+          col.setAttribute('data-aos-delay', (index * 100 + 50) + ''); // Délai d'animation séquentiel
+
+          let buttonsHtml = '';
+          if (isComputer) {
+            buttonsHtml = `
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-details" data-bs-toggle="modal" data-bs-target="#computerDetailsModal" data-item-id="${item.id}">Voir plus</button>
+                <a href="https://wa.me/2290140434120?text=Je+souhaite+acheter+le+produit+:${encodeURIComponent(item.name)}" target="_blank" class="btn btn-buy">Acheter</a>
+              </div>
+            `;
+          } else {
+            buttonsHtml = `
+              <a href="https://wa.me/2290140434120?text=Je+souhaite+acheter+le+produit+:${encodeURIComponent(item.name)}" target="_blank" class="btn btn-buy w-100">Acheter</a>
+            `;
+          }
+
+          col.innerHTML = `
+            <div class="materiel-item-card">
+              <img src="${item.image}" alt="${item.name}">
+              <h4 class="title">${item.name}</h4>
+              <p class="price">${item.price}</p>
+              <p class="short-characteristics">${item.short_specs}</p>
+              ${buttonsHtml}
+            </div>
+          `;
+          container.appendChild(col);
+        });
+
+        // Ajouter les écouteurs pour les boutons "Voir plus" des ordinateurs
+        if (isComputer) {
+          container.querySelectorAll('.btn-details').forEach(button => {
+            button.addEventListener('click', (event) => {
+              const itemId = event.target.dataset.itemId;
+              const computer = computers.find(c => c.id === itemId);
+              if (computer) {
+                document.getElementById('modal-computer-name').textContent = computer.name;
+                document.getElementById('modal-computer-price').textContent = computer.price;
+                document.getElementById('modal-computer-image').src = computer.image;
+                const fullSpecsList = document.getElementById('modal-computer-full-specs');
+                fullSpecsList.innerHTML = '';
+                computer.full_specs.forEach(spec => {
+                  const li = document.createElement('li');
+                  li.innerHTML = `<strong>${spec.split(':')[0]}:</strong> ${spec.split(':')[1] || ''}`;
+                  fullSpecsList.appendChild(li);
+                });
+                document.getElementById('modal-computer-buy-link').href = `https://wa.me/2290140434120?text=Je+souhaite+acheter+le+produit+:${encodeURIComponent(computer.name)}`;
+              }
+            });
+          });
+        }
+      }
+
+      function setupPagination(paginationId, items, renderFunction, containerId) {
+        const paginationContainer = document.getElementById(paginationId);
+        paginationContainer.innerHTML = '';
+        const pageCount = Math.ceil(items.length / itemsPerPage);
+
+        for (let i = 1; i <= pageCount; i++) {
+          const li = document.createElement('li');
+          li.classList.add('page-item');
+          if (i === 1) li.classList.add('active'); // Première page active par défaut
+
+          const a = document.createElement('a');
+          a.classList.add('page-link');
+          a.href = '#';
+          a.textContent = i;
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll(`#${paginationId} .page-item`).forEach(item => item.classList.remove('active'));
+            li.classList.add('active');
+            renderFunction(containerId, items, i, containerId === 'computer-list');
+          });
+          li.appendChild(a);
+          paginationContainer.appendChild(li);
+        }
+      }
+
+      // Rendre la première page par défaut pour chaque section
+      renderItems('computer-list', computers, 1, true);
+      setupPagination('computer-pagination', computers, renderItems, 'computer-list');
+
+      renderItems('accessory-list', accessories, 1, false);
+      setupPagination('accessory-pagination', accessories, renderItems, 'accessory-list');
+
+      // Gérer l'état initial des accordions pour l'accessibilité si nécessaire
+      const computerCollapse = new bootstrap.Collapse(document.getElementById('collapseComputers'), { toggle: false });
+      const accessoryCollapse = new bootstrap.Collapse(document.getElementById('collapseAccessories'), { toggle: false });
+    });
+  </script>
+
+</body>
+</html>
