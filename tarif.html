@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarifs Pro | FlexiTech - Excellence Numérique</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #10141d;    
+      --secondary-dark: #1e2430;  
+      --accent-gold: #DAA520;     
+      --text-gray: #a0a0a0;
+    }
+
+    body {
+      background-color: #f8fafd;
+      font-family: 'Poppins', sans-serif;
+      color: #2c3e50;
+    }
+
+    /* --- NAVBAR --- */
+    .navbar {
+      background: var(--primary-dark) !important;
+      border-bottom: 2px solid var(--accent-gold);
+      padding: 15px 0;
+    }
+    .navbar-brand { font-family: 'Montserrat'; font-weight: 700; color: var(--accent-gold) !important; letter-spacing: 2px; }
+    .nav-link { color: #fff !important; font-weight: 500; margin-left: 20px;}
+
+    /* --- HEADER --- */
+    .pricing-header {
+      background: linear-gradient(rgba(16,20,29,0.9), rgba(16,20,29,0.9)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2011') center/cover;
+      padding: 140px 0 80px;
+      color: white;
+      text-align: center;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+    }
+
+    /* --- PACKS CARDS --- */
+    .pack-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      height: 100%;
+      border: 1px solid #eee;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pack-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border-color: var(--accent-gold);
+    }
+
+    .pack-featured {
+      border: 2px solid var(--accent-gold);
+      background: var(--primary-dark);
+      color: white;
+    }
+
+    .pack-badge {
+      position: absolute;
+      top: 20px;
+      right: -30px;
+      background: var(--accent-gold);
+      color: black;
+      padding: 5px 40px;
+      transform: rotate(45deg);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .pack-title { font-family: 'Montserrat'; font-weight: 700; font-size: 1.5rem; margin-bottom: 10px; }
+    .pack-subtitle { color: var(--accent-gold); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 25px; display: block; }
+    
+    .price-placeholder { font-size: 1.2rem; font-weight: 600; margin-bottom: 25px; }
+    .price-placeholder span { font-size: 0.9rem; font-weight: 400; color: var(--text-gray); }
+
+    .pack-features { list-style: none; padding: 0; margin-bottom: 30px; flex-grow: 1; }
+    .pack-features li { margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: flex-start; }
+    .pack-features li i { color: var(--accent-gold); margin-right: 10px; margin-top: 3px; }
+
+    .btn-pack {
+      border-radius: 50px;
+      padding: 12px 25px;
+      font-weight: 600;
+      transition: 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-gold { background: var(--accent-gold); color: black; border: none; }
+    .btn-gold:hover { background: #b8860b; color: white; }
+
+    .btn-outline-gold { border: 2px solid var(--accent-gold); color: var(--accent-gold); background: transparent; }
+    .btn-outline-gold:hover { background: var(--accent-gold); color: white; }
+
+    /* --- SECTION RASSURANCE --- */
+    .trust-section { padding: 60px 0; background: #fff; }
+    .trust-box { text-align: center; padding: 20px; }
+    .trust-box i { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 15px; }
+
+    /* --- FOOTER --- */
+    footer { background: var(--primary-dark); color: #fff; padding: 60px 0 30px; }
+    .footer-title { color: var(--accent-gold); font-family: 'Montserrat'; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index1.html">FLEXITECH</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index1.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link active" href="tarifs.html">Packs Pro</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="pricing-header">
+    <div class="container" data-aos="fade-down">
+      <h1 class="display-4 fw-bold">Solutions & <span style="color:var(--accent-gold)">Investissements</span></h1>
+      <p class="lead">Des tarifs transparents, ajustés à la réalité de votre projet.</p>
+    </div>
+  </header>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+        
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="pack-card">
+            <span class="pack-subtitle">Visibilité Web</span>
+            <h3 class="pack-title">Pack PME Start</h3>
+            <div class="price-placeholder">Sur Devis <span>/ Projet</span></div>
+            <ul class="pack-features">
+              <li><i class="bi bi-check-circle-fill"></i> Site Vitrine Responsive</li>
+              <li><i class="bi bi-check-circle-fill"></i> Optimisation SEO Locale</li>
+              <li><i class="bi bi-check-circle-fill"></i> Formation prise en main</li>
+              <li><i class="bi bi-check-circle-fill"></i> Hébergement 1 an offert</li>
+              <li><i class="bi bi-star-fill"></i> <strong>Offre de lancement dispo.</strong></li>
+            </ul>
+            <a href="contact.html?service=pme" class="btn btn-pack btn-outline-gold">Demander l'offre</a>
+          </div>
+        </div>
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="pack-card pack-featured">
+            <div class="pack-badge">POPULAIRE</div>
+            <span class="pack-subtitle" style="color: #fff; opacity: 0.8;">Accompagnement</span>
+            <h3 class="pack-title">Pack Carrière +</h3>
+            <div class="price-placeholder">Tarif Flexible <span>/ Pack</span></div>
+            <ul class="pack-features">
+              <li><i class="bi bi-check-circle-fill"></i> Création de CV Premium</li>
+              <li><i class="bi bi-check-circle-fill"></i> Portfolio Interactif Perso</li>
+              <li><i class="bi bi-check-circle-fill"></i> Optimisation Profil LinkedIn</li>
+              <li><i class="bi bi-check-circle-fill"></i> Conseil en Image Numérique</li>
+              <li><i class="bi bi-check-circle-fill"></i> Révision illimitée (7 jours)</li>
+            </ul>
+            <a href="contact.html?service=carriere" class="btn btn-pack btn-gold text-dark">Propulser mon profil</a>
+          </div>
+        </div>
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="pack-card">
+            <span class="pack-subtitle">Rédaction & Rigueur</span>
+            <h3 class="pack-title">Pack Business Doc</h3>
+            <div class="price-placeholder">À la page <span>ou Forfait</span></div>
+            <ul class="pack-features">
+              <li><i class="bi bi-check-circle-fill"></i> Rédaction Business Plan</li>
+              <li><i class="bi bi-check-circle-fill"></i> Correction Rapports/Mémoires</li>
+              <li><i class="bi bi-check-circle-fill"></i> Mise en page professionnelle</li>
+              <li><i class="bi bi-check-circle-fill"></i> Garantie Zéro Faute</li>
+              <li><i class="bi bi-check-circle-fill"></i> Confidentialité Totale</li>
+            </ul>
+            <a href="contact.html?service=redaction" class="btn btn-pack btn-outline-gold">Étudier mon besoin</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 trust-box" data-aos="fade-right">
+          <i class="bi bi-shield-check"></i>
+          <h5>Prix Juste</h5>
+          <p class="small text-muted">Pas de coûts cachés. Nous adaptons nos tarifs à l'ampleur réelle de vos besoins informatiques.</p>
+        </div>
+        <div class="col-md-4 trust-box" data-aos="fade-up">
+          <i class="bi bi-lightning-charge"></i>
+          <h5>Devis Express</h5>
+          <p class="small text-muted">Réponse sous 24h. Nous savons que votre temps est précieux, tout comme votre budget.</p>
+        </div>
+        <div class="col-md-4 trust-box" data-aos="fade-left">
+          <i class="bi bi-gem"></i>
+          <h5>Qualité Garantie</h5>
+          <p class="small text-muted">Chaque pack inclut un suivi post-livraison pour assurer votre satisfaction totale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center">
+    <div class="container">
+      <h4 class="footer-title mb-4">Besoin d'un tarif sur mesure ?</h4>
+      <p>Pour le dépannage, la vente de matériel ou toute demande spécifique :</p>
+      <a href="contact.html" class="btn btn-gold btn-sm px-4">Contactez-nous directement</a>
+      <div class="mt-5 pt-4 border-top border-secondary small text-white-50">
+        © 2026 FlexiTech - Expertise Numérique à Cotonou.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 1000, once: true });</script>
+</body>
+</html>

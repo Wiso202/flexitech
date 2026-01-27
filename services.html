@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | FlexiTech - Expertise Numérique</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #10141d;    
+      --secondary-dark: #1e2430;  
+      --accent-gold: #DAA520;     
+      --gold-glow: rgba(218, 165, 32, 0.4);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      background-color: #f8fafd;
+      color: #2c3e50;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* --- NAVBAR --- */
+    .navbar {
+      background: rgba(16, 20, 29, 0.98) !important;
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--accent-gold);
+      padding: 15px 0;
+    }
+    .navbar-brand { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--accent-gold) !important; letter-spacing: 2px; }
+    .nav-link { color: #fff !important; text-transform: uppercase; font-weight: 500; margin-left: 20px;}
+    .nav-link:hover { color: var(--accent-gold) !important; }
+
+    /* --- HEADER --- */
+    .page-header {
+      background: linear-gradient(rgba(16,20,29,0.85), rgba(16,20,29,0.85)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070') center/cover;
+      padding: 160px 0 100px;
+      color: white;
+      text-align: center;
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+    }
+
+    /* --- NOUVEAU DESIGN : SERVICES PRIORITAIRES --- */
+    .priority-services {
+      background: var(--primary-dark);
+      padding: 80px 0;
+      margin-top: -50px;
+      position: relative;
+      z-index: 10;
+      border-bottom: 3px solid var(--accent-gold);
+    }
+    
+    .priority-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--accent-gold);
+      border-radius: 15px;
+      padding: 30px;
+      transition: 0.3s;
+      height: 100%;
+    }
+    
+    .priority-card:hover {
+      background: rgba(218, 165, 32, 0.1);
+      transform: scale(1.03);
+    }
+
+    .priority-card i { color: var(--accent-gold); font-size: 2.5rem; margin-bottom: 20px; display: block; }
+    .priority-card h4 { color: white; font-family: 'Montserrat'; font-weight: 700; }
+    .priority-card p { color: #ccc; font-size: 0.9rem; }
+    .badge-promo { background: var(--accent-gold); color: black; font-weight: 700; padding: 5px 10px; border-radius: 5px; font-size: 0.7rem; margin-bottom: 10px; display: inline-block; }
+
+    /* --- CARDS STYLE CLASSIQUE --- */
+    .section-services { padding: 80px 0; }
+    
+    .service-item-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      border: 1px solid #eee;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      height: 100%;
+      position: relative;
+    }
+
+    .service-item-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border-color: var(--accent-gold);
+    }
+
+    .icon-wrapper {
+      width: 80px; height: 80px;
+      background: var(--primary-dark);
+      color: var(--accent-gold);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 18px;
+      margin: 0 auto 25px;
+      font-size: 2rem;
+      transition: 0.3s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .service-item-card .title { font-family: 'Montserrat'; font-weight: 700; font-size: 1.2rem; margin-bottom: 15px; }
+    .service-item-card .short-description { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
+
+    .btn-toggle {
+      background: transparent;
+      border: 2px solid var(--accent-gold);
+      color: var(--accent-gold);
+      font-weight: 600;
+      padding: 8px 25px;
+      border-radius: 50px;
+      transition: 0.3s;
+    }
+    .btn-toggle:hover { background: var(--accent-gold); color: white; }
+
+    .service-unavailable { filter: grayscale(1); opacity: 0.7; cursor: not-allowed; }
+    .badge-status { position: absolute; top: 15px; right: 15px; background: #e74c3c; color: white; font-size: 0.7rem; padding: 5px 12px; border-radius: 50px; text-transform: uppercase; font-weight: 700; }
+
+    #full-details-container { margin-top: 40px; padding: 40px; background: var(--primary-dark); color: white; border-radius: 20px; display: none; border-left: 5px solid var(--accent-gold); animation: fadeIn 0.5s ease; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    footer { background: var(--primary-dark); color: #fff; padding: 80px 0 30px; border-top: 2px solid var(--accent-gold); }
+    .footer-title { color: var(--accent-gold); font-family: 'Montserrat'; font-weight: 700; margin-bottom: 25px; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index1.html">FLEXITECH</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <i class="bi bi-list text-white fs-1"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index1.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="tarif.html">Packs Pro</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container" data-aos="fade-down">
+      <h1 class="display-3 fw-bold">Nos <span style="color:var(--accent-gold)">Services</span></h1>
+      <p class="lead">Des solutions informatiques de pointe pour particuliers et professionnels.</p>
+    </div>
+  </header>
+
+  <section class="priority-services">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="text-white font-weight-bold" style="font-family: 'Montserrat';">Offres <span style="color:var(--accent-gold)">Phares</span></h2>
+        <p class="text-white-50">Nos solutions stratégiques pour booster votre carrière et votre entreprise.</p>
+      </div>
+      <div class="row gy-4">
+        <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="priority-card">
+            <span class="badge-promo">OFFRE DE LANCEMENT</span>
+            <i class="bi bi-rocket-takeoff"></i>
+            <h4>Sites Vitrines PME</h4>
+            <p>Digitalisation accessible pour les 5 premières PME partenaires. Une visibilité immédiate pour propulser votre business local.</p>
+            <button class="btn btn-toggle w-100" onclick="showDetails('dev')">En savoir plus</button>
+          </div>
+        </div>
+        <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="priority-card">
+            <span class="badge-promo">PACK CARRIÈRE</span>
+            <i class="bi bi-person-badge-fill"></i>
+            <h4>Portfolio & CV Design</h4>
+            <p>Démarquez-vous des autres candidats. Nous créons votre identité visuelle professionnelle (CV + Portfolio + LinkedIn) pour convaincre les recruteurs.</p>
+            <button class="btn btn-toggle w-100" onclick="showDetails('portfolio')">Optimiser ma carrière</button>
+          </div>
+        </div>
+        <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="priority-card">
+            <span class="badge-promo">EXPERTISE RIGUEUR</span>
+            <i class="bi bi-pen-fill"></i>
+            <h4>Rédaction de Documents</h4>
+            <p>Zéro faute, clarté et gain de temps. Business plans, mémoires ou rapports internes : nous formalisons votre expertise avec professionnalisme.</p>
+            <button class="btn btn-toggle w-100" onclick="showDetails('redaction')">Confier ma rédaction</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-services">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="font-weight-bold" style="font-family: 'Montserrat';">Assistance & <span style="color:var(--accent-gold)">Matériel</span></h2>
+        </div>
+      <div class="row gy-4" id="service-cards-container">
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-item-card" data-service-id="depannage">
+            <div class="icon-wrapper"><i class="bi bi-tools"></i></div>
+            <h4 class="title">Dépannage informatique</h4>
+            <p class="short-description">Réparation de PC lents, infectés ou bloqués. Nettoyage et optimisation complète.</p>
+            <button class="btn btn-toggle" onclick="showDetails('depannage')">Voir plus</button>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-item-card" data-service-id="installation">
+            <div class="icon-wrapper"><i class="bi bi-cloud-download"></i></div>
+            <h4 class="title">Installation de logiciels</h4>
+            <p class="short-description">Windows, Office, antivirus, logiciels spécifiques selon vos besoins.</p>
+            <button class="btn btn-toggle" onclick="showDetails('installation')">Voir plus</button>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item-card" data-service-id="materiels">
+              <div class="icon-wrapper"><i class="bi bi-pc-display icon"></i></div>
+              <h4 class="title">Vente de matériels</h4>
+              <p class="short-description">Vente d'ordinateurs, imprimantes et accessoires informatiques de haute qualité.</p>
+              <button class="btn btn-toggle" onclick="showDetails('materiels')">Voir plus</button>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-item-card service-unavailable" data-service-id="reseaux">
+            <span class="badge-status">Bientôt disponible</span>
+            <div class="icon-wrapper"><i class="bi bi-share"></i></div>
+            <h4 class="title">Réseaux informatiques</h4>
+            <p class="short-description">Mise en réseau de plusieurs appareils avec partage sécurisé de connexion.</p>
+            <button class="btn btn-toggle disabled">Indisponible</button>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-item-card service-unavailable" data-service-id="formation">
+            <span class="badge-status">Bientôt disponible</span>
+            <div class="icon-wrapper"><i class="bi bi-mortarboard"></i></div>
+            <h4 class="title">Formation</h4>
+            <p class="short-description">Apprenez à utiliser l’outil informatique avec des formations accessibles.</p>
+            <button class="btn btn-toggle disabled">Indisponible</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="full-details-container" class="mt-5">
+        <div id="details-content"></div>
+        <div class="text-end mt-3">
+            <button class="btn btn-outline-light btn-sm" onclick="closeDetails()">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row gy-5">
+        <div class="col-lg-4">
+          <h4 class="footer-title">FLEXITECH</h4>
+          <p class="text-white-50">L’informatique qui s’adapte à vos besoins. Solutions innovantes à Cotonou.</p>
+        </div>
+        <div class="col-lg-4">
+          <h5 class="footer-title">Contact rapide</h5>
+          <p class="small mb-2"><i class="bi bi-telephone-fill me-2 text-warning"></i> +229 01 40 43 41 20</p>
+          <p class="small mb-2"><i class="bi bi-envelope-fill me-2 text-warning"></i> flexitech92@gmail.com</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <h5 class="footer-title">Suivez l'actualité</h5>
+          <div class="d-flex justify-content-lg-end gap-3 fs-3">
+            <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    const servicesData = {
+        'dev': {
+            title: "Offre de lancement : Site Vitrine PME",
+            text: "Nous recherchons nos 5 premières PME partenaires ! Profitez d'une visibilité numérique complète à un tarif exceptionnel en échange d'un témoignage. Une opportunité unique de digitaliser votre activité avec un design professionnel."
+        },
+        'portfolio': {
+            title: "Pack Carrière (Portfolio & CV)",
+            text: "Vendez votre crédibilité ! Nous créons pour vous un CV impactant et un portfolio interactif qui vous feront sortir du lot face aux recruteurs. Inclus : optimisation de votre profil LinkedIn pour attirer les chasseurs de tête."
+        },
+        'redaction': {
+            title: "Rédaction de Documents Professionnels",
+            text: "Gagnez en temps et en rigueur. Nous rédigeons vos business plans, corrigeons vos mémoires et formalisons vos rapports de PME. Un service garanti sans faute pour une image de marque irréprochable."
+        },
+        'depannage': {
+            title: "Dépannage Informatique",
+            text: "Écran bleu, lenteurs ou virus ? Nous intervenons pour redonner une seconde vie à votre matériel."
+        },
+        'installation': {
+            title: "Installation de Logiciels",
+            text: "Installation propre de Windows, Suite Office, Antivirus et logiciels spécifiques selon vos besoins."
+        },
+        'materiels': {
+            title: "Vente de matériel informatique",
+            text: "Ordinateurs portables, imprimantes et accessoires garantis et sélectionnés pour leur fiabilité."
+        }
+    };
+
+    function showDetails(id) {
+        const container = document.getElementById('full-details-container');
+        const content = document.getElementById('details-content');
+        content.innerHTML = `
+            <h3 style="color:var(--accent-gold)">${servicesData[id].title}</h3>
+            <p class="lead">${servicesData[id].text}</p>
+            <a href="contact.html" class="btn btn-warning mt-3">On en discute ?</a>
+        `;
+        container.style.display = 'block';
+        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function closeDetails() {
+        document.getElementById('full-details-container').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

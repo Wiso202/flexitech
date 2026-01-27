@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | FlexiTech - Expertise Numérique</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #10141d;
+      --secondary-dark: #1e2430;
+      --accent-gold: #DAA520;
+      --text-gray: #a0a0a0;
+    }
+
+    body {
+      background-color: #f8fafd;
+      font-family: 'Poppins', sans-serif;
+      color: #2c3e50;
+    }
+
+    /* --- NAVBAR --- */
+    .navbar {
+      background: var(--primary-dark) !important;
+      border-bottom: 2px solid var(--accent-gold);
+      padding: 15px 0;
+    }
+    .navbar-brand { font-family: 'Montserrat'; font-weight: 700; color: var(--accent-gold) !important; letter-spacing: 2px; }
+    .nav-link { color: #fff !important; font-weight: 500; margin-left: 20px;}
+
+    /* --- CONTACT HEADER --- */
+    .contact-header {
+      background: linear-gradient(rgba(16,20,29,0.9), rgba(16,20,29,0.9)), url('https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=2070') center/cover;
+      padding: 140px 0 60px;
+      color: white;
+      text-align: center;
+    }
+
+    /* --- FORM CARD --- */
+    .contact-wrapper {
+      margin-top: -50px;
+      margin-bottom: 80px;
+    }
+
+    .info-card {
+      background: var(--primary-dark);
+      color: white;
+      border-radius: 20px;
+      padding: 40px;
+      height: 100%;
+      border-bottom: 5px solid var(--accent-gold);
+    }
+
+    .form-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+
+    .form-control {
+      border: 1px solid #eee;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 0.25; margin-bottom: 10px;
+    }
+
+    .btn-send {
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: 0.3s;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn-whatsapp { background: #25D366; color: white; border: none; }
+    .btn-whatsapp:hover { background: #128C7E; transform: translateY(-3px); }
+
+    .btn-email { background: var(--primary-dark); color: white; border: none; }
+    .btn-email:hover { background: #000; transform: translateY(-3px); }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .contact-info-item i {
+      font-size: 1.5rem;
+      color: var(--accent-gold);
+      margin-right: 20px;
+      background: rgba(255,255,255,0.05);
+      width: 50px; height: 50px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+    }
+
+    footer { background: var(--primary-dark); color: #fff; padding: 40px 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index1.html">FLEXITECH</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index1.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="tarifs.html">Packs Pro</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="contact-header">
+    <div class="container" data-aos="fade-down">
+      <h1 class="display-4 fw-bold">Parlons de votre <span style="color:var(--accent-gold)">Projet</span></h1>
+      <p class="lead">Réponse rapide garantie sous 24 heures.</p>
+    </div>
+  </header>
+
+  <section class="contact-wrapper">
+    <div class="container">
+      <div class="row g-0">
+        <div class="col-lg-4" data-aos="fade-right">
+          <div class="info-card">
+            <h3 class="mb-4" style="font-family: 'Montserrat';">Nos Coordonnées</h3>
+            <div class="contact-info-item">
+              <i class="bi bi-geo-alt"></i>
+              <div>
+                <p class="mb-0 small text-gray">Localisation</p>
+                <p class="mb-0 fw-bold">Cotonou, Bénin</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="bi bi-telephone"></i>
+              <div>
+                <p class="mb-0 small text-gray">Téléphone</p>
+                <p class="mb-0 fw-bold">+229 01 40 43 41 20</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="bi bi-envelope"></i>
+              <div>
+                <p class="mb-0 small text-gray">E-mail</p>
+                <p class="mb-0 fw-bold">flexitech92@gmail.com</p>
+              </div>
+            </div>
+            <hr class="my-4" style="opacity: 0.1;">
+            <div class="social-links d-flex gap-3">
+              <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="text-white fs-4"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8" data-aos="fade-left">
+          <div class="form-card">
+            <form id="contactForm">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label small fw-bold">Votre Nom</label>
+                  <input type="text" id="userName" class="form-control" placeholder="Ex: Jean Dupont" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label small fw-bold">Téléphone / WhatsApp</label>
+                  <input type="tel" id="userPhone" class="form-control" placeholder="+229 ..." required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Objet de votre demande</label>
+                <input type="text" id="subject" class="form-control" placeholder="Sujet de votre message" required>
+              </div>
+              <div class="mb-4">
+                <label class="form-label small fw-bold">Votre Message</label>
+                <textarea id="message" class="form-control" rows="5" placeholder="Décrivez votre projet ici..." required></textarea>
+              </div>
+              
+              <div class="row g-2">
+                <div class="col-md-6">
+                  <button type="button" onclick="sendToWhatsApp()" class="btn btn-send btn-whatsapp">
+                    <i class="bi bi-whatsapp me-2"></i> Via WhatsApp
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button type="button" onclick="sendToEmail()" class="btn btn-send btn-email">
+                    <i class="bi bi-envelope me-2"></i> Via E-mail
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center">
+    <div class="container">
+      <p class="small text-white-50 mb-0">© 2026 FlexiTech - Expertise Numérique. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // --- SCRIPT POUR PRÉ-REMPLIR LE CHAMP OBJET ---
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceId = urlParams.get('service');
+        const subjectField = document.getElementById('subject');
+
+        const serviceNames = {
+            'pme': 'Demande de Pack PME Start (Site Vitrine)',
+            'carriere': 'Demande de Pack Carrière + (CV & Portfolio)',
+            'redaction': 'Demande de Pack Business Doc (Rédaction)',
+            'dev': 'Information Création Site Web',
+            'depannage': 'Besoin de Dépannage Informatique',
+            'materiels': 'Achat de Matériel Informatique'
+        };
+
+        if(serviceId && serviceNames[serviceId]) {
+            subjectField.value = serviceNames[serviceId];
+            subjectField.classList.add('bg-light');
+        }
+    }
+
+    // --- FONCTION ENVOI WHATSAPP ---
+    function sendToWhatsApp() {
+        const name = document.getElementById('userName').value;
+        const phone = document.getElementById('userPhone').value;
+        const subject = document.getElementById('subject').value;
+        const msg = document.getElementById('message').value;
+
+        if(!name || !phone || !subject || !msg) { alert("Veuillez remplir tous les champs."); return; }
+
+        const whatsappNumber = "2290140434120"; 
+        const text = `*NOUVELLE DEMANDE FLEXITECH*%0A%0A*Nom:* ${name}%0A*Contact:* ${phone}%0A*Objet:* ${subject}%0A*Message:* ${msg}`;
+        
+        window.open(`https://wa.me/${whatsappNumber}?text=${text}`, '_blank');
+    }
+
+    // --- FONCTION ENVOI E-MAIL ---
+    function sendToEmail() {
+        const name = document.getElementById('userName').value;
+        const subject = document.getElementById('subject').value;
+        const msg = document.getElementById('message').value;
+
+        if(!name || !subject || !msg) { alert("Veuillez remplir tous les champs."); return; }
+
+        const email = "flexitech92@gmail.com";
+        const body = `Nom: ${name}%0D%0A%0D%0AMessage:%0D%0A${msg}`;
+        
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
