@@ -46,7 +46,7 @@
       clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
     }
 
-    /* --- NOUVEAU DESIGN : SERVICES PRIORITAIRES --- */
+    /* --- SERVICES PRIORITAIRES --- */
     .priority-services {
       background: var(--primary-dark);
       padding: 80px 0;
@@ -121,6 +121,30 @@
     }
     .btn-toggle:hover { background: var(--accent-gold); color: white; }
 
+    /* --- SECTION RÉALISATIONS (PORTFOLIO) --- */
+    .section-portfolio { padding: 80px 0; background: #fff; }
+    .portfolio-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      background: var(--primary-dark);
+      color: white;
+      transition: 0.3s;
+    }
+    .portfolio-card:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    .portfolio-content { padding: 25px; }
+    .portfolio-link { color: var(--accent-gold); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+    .portfolio-link:hover { text-decoration: underline; }
+
+    .stat-box {
+      background: #f8fafd;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 4px solid var(--accent-gold);
+    }
+    .stat-box i { font-size: 2rem; color: var(--accent-gold); }
+
     .service-unavailable { filter: grayscale(1); opacity: 0.7; cursor: not-allowed; }
     .badge-status { position: absolute; top: 15px; right: 15px; background: #e74c3c; color: white; font-size: 0.7rem; padding: 5px 12px; border-radius: 50px; text-transform: uppercase; font-weight: 700; }
 
@@ -193,6 +217,62 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section-portfolio">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="font-weight-bold" style="font-family: 'Montserrat';">Nos <span style="color:var(--accent-gold)">Réalisations</span></h2>
+            <p class="text-muted">La preuve de notre expertise à travers nos derniers projets.</p>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-6" data-aos="fade-right">
+                <div class="portfolio-card">
+                    <div class="portfolio-content">
+                        <span class="badge bg-warning text-dark mb-2">Web Design</span>
+                        <h4>Event Hub</h4>
+                        <p class="small text-white-50">Plateforme moderne de gestion et de visibilité d'événements.</p>
+                        <a href="https://event-hub-pearl.vercel.app/" target="_blank" class="portfolio-link">Visiter le site <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+                <div class="portfolio-card">
+                    <div class="portfolio-content">
+                        <span class="badge bg-warning text-dark mb-2">IA & Recherche</span>
+                        <h4>IA Pro Finder</h4>
+                        <p class="small text-white-50">Outil intelligent de recherche et de localisation spécialisé.</p>
+                        <a href="https://iaprofinder.vercel.app/" target="_blank" class="portfolio-link">Visiter le site <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-box">
+                    <i class="bi bi-pc-display-horizontal"></i>
+                    <h5 class="mt-3">Vente & Conseil</h5>
+                    <p class="small text-muted">+50 ordinateurs et composants configurés et livrés avec succès.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-box">
+                    <i class="bi bi-cpu"></i>
+                    <h5 class="mt-3">Maintenance Pro</h5>
+                    <p class="small text-muted" >Optimisation de SI et déploiement de logiciels métiers pour entreprises.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-box">
+                    <i class="bi bi-shield-lock"></i>
+                    <h5 class="mt-3">Sécurité & SI</h5>
+                    <p class="small text-muted">Installation de systèmes d'exploitation et sécurisation de données critiques.</p>
+                </div>
+            </div>
+        </div>
     </div>
   </section>
 
@@ -305,15 +385,15 @@
         },
         'depannage': {
             title: "Dépannage Informatique",
-            text: "Écran bleu, lenteurs ou virus ? Nous intervenons pour redonner une seconde vie à votre matériel."
+            text: "Écran bleu, lenteurs ou virus ? Nous intervenons pour redonner une seconde vie à votre matériel (Maintenance préventive et curative)."
         },
         'installation': {
-            title: "Installation de Logiciels",
-            text: "Installation propre de Windows, Suite Office, Antivirus et logiciels spécifiques selon vos besoins."
+            title: "Installation de Logiciels & SI",
+            text: "Installation propre de Windows, Suite Office, Antivirus et déploiement de Systèmes d'Information (SI) sur mesure."
         },
         'materiels': {
             title: "Vente de matériel informatique",
-            text: "Ordinateurs portables, imprimantes et accessoires garantis et sélectionnés pour leur fiabilité."
+            text: "Ordinateurs portables, imprimantes et composants (RAM, SSD, etc.) garantis et sélectionnés pour leur fiabilité."
         }
     };
 
@@ -334,6 +414,4 @@
     }
   </script>
 </body>
-
 </html>
-
