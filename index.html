@@ -112,6 +112,41 @@
       transition: 0.3s; box-shadow: 0 10px 20px var(--gold-glow);
     }
     .btn-pro:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255,255,255,0.2); }
+    .testimonial-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        height: 100%;
+        border-bottom: 3px solid transparent;
+        transition: 0.3s;
+    }
+    .testimonial-card:hover { border-color: var(--accent-gold); transform: translateY(-5px); }
+    .border-gold { border-color: var(--accent-gold); }
+
+    .avatar-placeholder {
+        width: 45px; height: 45px;
+        background: var(--primary-dark);
+        color: var(--accent-gold);
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; font-weight: bold;
+    }
+
+    .review-form-box {
+        background: #fff;
+        border: 1px dashed var(--accent-gold);
+        border-radius: 20px;
+    }
+
+    .btn-gold {
+        background: var(--accent-gold);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+    .btn-gold:hover { background: #b8860b; box-shadow: 0 5px 15px rgba(218, 165, 32, 0.3); }
 
     /* --- FOOTER --- */
     footer { background: var(--primary-dark); color: #fff; padding: 80px 0 30px; border-top: 1px solid var(--glass-border); }
@@ -272,7 +307,70 @@
       </div>
     </div>
   </section>
+<section class="py-5" style="background: #fdfdfd;">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="font-weight-bold" style="font-family: 'Montserrat';">Ce qu'ils disent de <span style="color:var(--accent-gold)">FlexiTech</span></h2>
+            <p class="text-muted">La satisfaction de nos clients est notre meilleure publicité.</p>
+        </div>
 
+        <div class="row g-4" id="testimonials-container">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar-placeholder">J</div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">Jean M.</h6>
+                            <small class="text-muted text-warning">★★★★★</small>
+                        </div>
+                    </div>
+                    <p class="small italic text-muted">"Un service de dépannage ultra rapide. Mon PC est comme neuf. Je recommande vivement FlexiTech !"</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card border-gold">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar-placeholder">S</div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">Sarah L.</h6>
+                            <small class="text-muted text-warning">★★★★★</small>
+                        </div>
+                    </div>
+                    <p class="small italic text-muted">"Mon nouveau portfolio est magnifique. Grâce à FlexiTech, j'ai déjà eu deux entretiens."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8">
+                <div class="review-form-box p-4" data-aos="zoom-in">
+                    <h5 class="mb-4 text-center">Partagez votre expérience</h5>
+                    <form id="reviewForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" id="revName" class="form-control" placeholder="Votre Nom" required>
+                            </div>
+                            <div class="col-md-6 text-center d-flex align-items-center justify-content-center">
+                                <label class="me-2 small">Note :</label>
+                                <select id="revRate" class="form-select form-select-sm w-50">
+                                    <option value="5">★★★★★ (5/5)</option>
+                                    <option value="4">★★★★☆ (4/5)</option>
+                                    <option value="3">★★★☆☆ (3/5)</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <textarea id="revText" class="form-control" rows="3" placeholder="Votre avis sur nos services..." required></textarea>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-gold px-5 py-2">Publier mon avis</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
   <footer>
     <div class="container">
       <div class="row gy-5">
@@ -306,6 +404,47 @@
   <script>
     AOS.init({ duration: 1000, once: true, easing: 'ease-in-out' });
   </script>
+  <script>
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Récupération des données
+    const name = document.getElementById('revName').value;
+    const rate = document.getElementById('revRate').value;
+    const text = document.getElementById('revText').value;
+    const firstLetter = name.charAt(0).toUpperCase();
+
+    // Création des étoiles
+    let stars = "";
+    for(let i=0; i<5; i++) {
+        stars += i < rate ? "★" : "☆";
+    }
+
+    // Création du nouveau témoignage
+    const newTestimonial = `
+        <div class="col-md-4">
+            <div class="testimonial-card border-gold">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="avatar-placeholder">${firstLetter}</div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 fw-bold">${name}</h6>
+                        <small class="text-warning">${stars}</small>
+                    </div>
+                </div>
+                <p class="small italic text-muted">"${text}"</p>
+            </div>
+        </div>
+    `;
+
+    // Ajout à la liste
+    document.getElementById('testimonials-container').insertAdjacentHTML('afterbegin', newTestimonial);
+
+    // Reset du formulaire
+    this.reset();
+    alert("Merci pour votre avis ! Il a été publié.");
+});
+  </script>
 </body>
 
 </html>
+
