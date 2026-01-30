@@ -110,8 +110,10 @@
       background: var(--accent-gold); color: #000; font-weight: 700; 
       padding: 16px 40px; border-radius: 8px; border: none; 
       transition: 0.3s; box-shadow: 0 10px 20px var(--gold-glow);
+      text-decoration: none;
     }
-    .btn-pro:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255,255,255,0.2); }
+    .btn-pro:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255,255,255,0.2); color: #000;}
+    
     .testimonial-card {
         background: white;
         padding: 25px;
@@ -184,11 +186,7 @@
           <span class="hero-tagline" data-aos="fade-right" data-aos-delay="200">Innovation & Fiabilité</span>
           <h1 class="hero-title">Votre futur numérique <br><span style="color:var(--accent-gold)">commence ici.</span></h1>
           <p class="lead mb-5 text-white-50" style="max-width: 600px;">Expertise informatique sur mesure pour booster votre quotidien et vos projets professionnels au Bénin.</p>
-          <div class="d-flex gap-3">
-            <a href="contact.html" class="btn btn-pro">Lancer mon projet</a>
-            <a href="services.html" class="btn btn-outline-light px-4 py-3" style="border-radius: 8px;">Voir les services</a>
           </div>
-        </div>
       </div>
     </div>
   </header>
@@ -307,7 +305,8 @@
       </div>
     </div>
   </section>
-<section class="py-5" style="background: #fdfdfd;">
+
+  <section class="py-5" style="background: #fdfdfd;">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
             <h2 class="font-weight-bold" style="font-family: 'Montserrat';">Ce qu'ils disent de <span style="color:var(--accent-gold)">FlexiTech</span></h2>
@@ -370,7 +369,18 @@
             </div>
         </div>
     </div>
-</section>
+  </section>
+
+  <section class="py-5 text-center" style="background: #f8fafd;">
+    <div class="container" data-aos="fade-up">
+        <h3 class="mb-4 fw-bold" style="font-family: 'Montserrat';">Besoin d'un accompagnement pro ?</h3>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="contact.html" class="btn btn-pro">Lancer mon projet</a>
+            <a href="services.html" class="btn btn-outline-dark px-4 py-3" style="border-radius: 8px; font-weight: 600;">Voir les services</a>
+        </div>
+    </div>
+  </section>
+
   <footer>
     <div class="container">
       <div class="row gy-5">
@@ -403,48 +413,67 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true, easing: 'ease-in-out' });
-  </script>
-  <script>
-    document.getElementById('reviewForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Récupération des données
-    const name = document.getElementById('revName').value;
-    const rate = document.getElementById('revRate').value;
-    const text = document.getElementById('revText').value;
-    const firstLetter = name.charAt(0).toUpperCase();
 
-    // Création des étoiles
-    let stars = "";
-    for(let i=0; i<5; i++) {
-        stars += i < rate ? "★" : "☆";
+    // --- RALENTIR LA VIDÉO ---
+    const video = document.getElementById('header-video');
+    video.playbackRate = 0.6; // Vitesse réduite à 60%
+
+    // --- GESTION DES AVIS AVEC LOCALSTORAGE ---
+    const reviewForm = document.getElementById('reviewForm');
+    const testimonialsContainer = document.getElementById('testimonials-container');
+
+    // Fonction pour afficher un avis
+    function renderReview(name, rate, text) {
+        const firstLetter = name.charAt(0).toUpperCase();
+        let stars = "";
+        for(let i=0; i<5; i++) {
+            stars += i < rate ? "★" : "☆";
+        }
+
+        const html = `
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="testimonial-card border-gold">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar-placeholder">${firstLetter}</div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">${name}</h6>
+                            <small class="text-warning">${stars}</small>
+                        </div>
+                    </div>
+                    <p class="small italic text-muted">"${text}"</p>
+                </div>
+            </div>`;
+        testimonialsContainer.insertAdjacentHTML('afterbegin', html);
     }
 
-    // Création du nouveau témoignage
-    const newTestimonial = `
-        <div class="col-md-4">
-            <div class="testimonial-card border-gold">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="avatar-placeholder">${firstLetter}</div>
-                    <div class="ms-3">
-                        <h6 class="mb-0 fw-bold">${name}</h6>
-                        <small class="text-warning">${stars}</small>
-                    </div>
-                </div>
-                <p class="small italic text-muted">"${text}"</p>
-            </div>
-        </div>
-    `;
+    // Charger les avis sauvegardés au chargement de la page
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedReviews = JSON.parse(localStorage.getItem('flexitech_reviews')) || [];
+        savedReviews.forEach(rev => {
+            renderReview(rev.name, rev.rate, rev.text);
+        });
+    });
 
-    // Ajout à la liste
-    document.getElementById('testimonials-container').insertAdjacentHTML('afterbegin', newTestimonial);
+    // Écouter la soumission du formulaire
+    reviewForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('revName').value;
+        const rate = document.getElementById('revRate').value;
+        const text = document.getElementById('revText').value;
 
-    // Reset du formulaire
-    this.reset();
-    alert("Merci pour votre avis ! Il a été publié.");
-});
+        // 1. Sauvegarder dans LocalStorage
+        const savedReviews = JSON.parse(localStorage.getItem('flexitech_reviews')) || [];
+        savedReviews.push({ name, rate, text });
+        localStorage.setItem('flexitech_reviews', JSON.stringify(savedReviews));
+
+        // 2. Afficher immédiatement
+        renderReview(name, rate, text);
+
+        // 3. Reset
+        this.reset();
+        alert("Merci pour votre avis ! Il est maintenant enregistré.");
+    });
   </script>
 </body>
-
 </html>
-
