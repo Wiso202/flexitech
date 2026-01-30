@@ -105,15 +105,44 @@
       box-shadow: 0 0 20px var(--gold-glow);
     }
 
-    /* --- BOUTONS PRO --- */
-    .btn-pro { 
-      background: var(--accent-gold); color: #000; font-weight: 700; 
-      padding: 16px 40px; border-radius: 8px; border: none; 
-      transition: 0.3s; box-shadow: 0 10px 20px var(--gold-glow);
+    /* --- BOUTONS DESIGN MODERNE (Action Section) --- */
+    .btn-custom-action {
+      position: relative;
+      padding: 15px 35px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.4s;
+      overflow: hidden;
+      border: none;
       text-decoration: none;
+      display: inline-block;
     }
-    .btn-pro:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255,255,255,0.2); color: #000;}
-    
+    .btn-gold-neon {
+      background: var(--primary-dark);
+      color: var(--accent-gold);
+      border: 2px solid var(--accent-gold);
+      box-shadow: 0 0 10px rgba(218, 165, 32, 0.2);
+    }
+    .btn-gold-neon:hover {
+      background: var(--accent-gold);
+      color: #000;
+      box-shadow: 0 0 30px var(--gold-glow);
+      transform: scale(1.05);
+    }
+    .btn-dark-outline {
+      background: transparent;
+      color: var(--primary-dark);
+      border: 2px solid var(--primary-dark);
+    }
+    .btn-dark-outline:hover {
+      background: var(--primary-dark);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    /* --- AVIS ET FORMULAIRE --- */
     .testimonial-card {
         background: white;
         padding: 25px;
@@ -125,7 +154,6 @@
     }
     .testimonial-card:hover { border-color: var(--accent-gold); transform: translateY(-5px); }
     .border-gold { border-color: var(--accent-gold); }
-
     .avatar-placeholder {
         width: 45px; height: 45px;
         background: var(--primary-dark);
@@ -133,13 +161,11 @@
         display: flex; align-items: center; justify-content: center;
         border-radius: 50%; font-weight: bold;
     }
-
     .review-form-box {
         background: #fff;
         border: 1px dashed var(--accent-gold);
         border-radius: 20px;
     }
-
     .btn-gold {
         background: var(--accent-gold);
         color: #fff;
@@ -186,7 +212,7 @@
           <span class="hero-tagline" data-aos="fade-right" data-aos-delay="200">Innovation & Fiabilité</span>
           <h1 class="hero-title">Votre futur numérique <br><span style="color:var(--accent-gold)">commence ici.</span></h1>
           <p class="lead mb-5 text-white-50" style="max-width: 600px;">Expertise informatique sur mesure pour booster votre quotidien et vos projets professionnels au Bénin.</p>
-          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -314,31 +340,7 @@
         </div>
 
         <div class="row g-4" id="testimonials-container">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="testimonial-card">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="avatar-placeholder">J</div>
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">Jean M.</h6>
-                            <small class="text-muted text-warning">★★★★★</small>
-                        </div>
-                    </div>
-                    <p class="small italic text-muted">"Un service de dépannage ultra rapide. Mon PC est comme neuf. Je recommande vivement FlexiTech !"</p>
-                </div>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="testimonial-card border-gold">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="avatar-placeholder">S</div>
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">Sarah L.</h6>
-                            <small class="text-muted text-warning">★★★★★</small>
-                        </div>
-                    </div>
-                    <p class="small italic text-muted">"Mon nouveau portfolio est magnifique. Grâce à FlexiTech, j'ai déjà eu deux entretiens."</p>
-                </div>
-            </div>
-        </div>
 
         <div class="row justify-content-center mt-5">
             <div class="col-lg-8">
@@ -347,21 +349,21 @@
                     <form id="reviewForm">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <input type="text" id="revName" class="form-control" placeholder="Votre Nom" required>
+                                <input type="text" id="revName" name="nom" class="form-control" placeholder="Votre Nom" required>
                             </div>
                             <div class="col-md-6 text-center d-flex align-items-center justify-content-center">
                                 <label class="me-2 small">Note :</label>
-                                <select id="revRate" class="form-select form-select-sm w-50">
+                                <select id="revRate" name="note" class="form-select form-select-sm w-50">
                                     <option value="5">★★★★★ (5/5)</option>
                                     <option value="4">★★★★☆ (4/5)</option>
                                     <option value="3">★★★☆☆ (3/5)</option>
                                 </select>
                             </div>
                             <div class="col-12">
-                                <textarea id="revText" class="form-control" rows="3" placeholder="Votre avis sur nos services..." required></textarea>
+                                <textarea id="revText" name="avis" class="form-control" rows="3" placeholder="Votre avis sur nos services..." required></textarea>
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-gold px-5 py-2">Publier mon avis</button>
+                                <button type="submit" id="submitBtn" class="btn btn-gold px-5 py-2">Publier mon avis</button>
                             </div>
                         </div>
                     </form>
@@ -371,12 +373,16 @@
     </div>
   </section>
 
-  <section class="py-5 text-center" style="background: #f8fafd;">
+  <section class="py-5 text-center" style="background: #f8fafd; border-top: 1px solid #eee;">
     <div class="container" data-aos="fade-up">
-        <h3 class="mb-4 fw-bold" style="font-family: 'Montserrat';">Besoin d'un accompagnement pro ?</h3>
-        <div class="d-flex justify-content-center gap-3">
-            <a href="contact.html" class="btn btn-pro">Lancer mon projet</a>
-            <a href="services.html" class="btn btn-outline-dark px-4 py-3" style="border-radius: 8px; font-weight: 600;">Voir les services</a>
+        <h3 class="mb-4 fw-bold" style="font-family: 'Montserrat';">Prêt à transformer votre informatique ?</h3>
+        <div class="d-flex justify-content-center flex-wrap gap-4">
+            <a href="contact.html" class="btn-custom-action btn-gold-neon">
+                <i class="bi bi-rocket-takeoff me-2"></i> Lancer mon projet
+            </a>
+            <a href="services.html" class="btn-custom-action btn-dark-outline">
+                <i class="bi bi-eye me-2"></i> Explorer les services
+            </a>
         </div>
     </div>
   </section>
@@ -414,21 +420,17 @@
   <script>
     AOS.init({ duration: 1000, once: true, easing: 'ease-in-out' });
 
-    // --- RALENTIR LA VIDÉO ---
+    // Ralentir la vidéo
     const video = document.getElementById('header-video');
-    video.playbackRate = 0.6; // Vitesse réduite à 60%
+    if(video) video.playbackRate = 0.6;
 
-    // --- GESTION DES AVIS AVEC LOCALSTORAGE ---
-    const reviewForm = document.getElementById('reviewForm');
-    const testimonialsContainer = document.getElementById('testimonials-container');
+    // --- CONFIGURATION GOOGLE SHEETS ---
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwe99cI08D-rqqxFDFq--tghHVhultcpWrWf5OcyFOpDvGCmRzdFM57EBykflM3TxN/exec"; // <--- REMPLACE CECI PAR TON URL
 
-    // Fonction pour afficher un avis
     function renderReview(name, rate, text) {
         const firstLetter = name.charAt(0).toUpperCase();
         let stars = "";
-        for(let i=0; i<5; i++) {
-            stars += i < rate ? "★" : "☆";
-        }
+        for(let i=0; i<5; i++) stars += i < rate ? "★" : "☆";
 
         const html = `
             <div class="col-md-4" data-aos="fade-up">
@@ -443,37 +445,46 @@
                     <p class="small italic text-muted">"${text}"</p>
                 </div>
             </div>`;
-        testimonialsContainer.insertAdjacentHTML('afterbegin', html);
+        document.getElementById('testimonials-container').insertAdjacentHTML('afterbegin', html);
     }
 
-    // Charger les avis sauvegardés au chargement de la page
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedReviews = JSON.parse(localStorage.getItem('flexitech_reviews')) || [];
-        savedReviews.forEach(rev => {
-            renderReview(rev.name, rev.rate, rev.text);
+    // Charger les avis depuis Google Sheets
+    async function loadReviews() {
+        try {
+            const response = await fetch(SCRIPT_URL);
+            const data = await response.json();
+            data.forEach(rev => renderReview(rev.nom, rev.note, rev.avis));
+        } catch (error) {
+            console.error("Erreur chargement avis:", error);
+            // Avis par défaut si erreur ou vide
+            renderReview("Jean M.", 5, "Un service de dépannage ultra rapide !");
+            renderReview("Sarah L.", 5, "Mon nouveau portfolio est magnifique.");
+        }
+    }
+
+    // Envoyer un avis vers Google Sheets
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerText = "Publication...";
+
+        const formData = new FormData(this);
+        
+        fetch(SCRIPT_URL, { method: 'POST', body: formData })
+        .then(res => {
+            renderReview(formData.get('nom'), formData.get('note'), formData.get('avis'));
+            this.reset();
+            alert("Avis publié définitivement !");
+        })
+        .catch(err => alert("Erreur lors de la publication."))
+        .finally(() => {
+            btn.disabled = false;
+            btn.innerText = "Publier mon avis";
         });
     });
 
-    // Écouter la soumission du formulaire
-    reviewForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('revName').value;
-        const rate = document.getElementById('revRate').value;
-        const text = document.getElementById('revText').value;
-
-        // 1. Sauvegarder dans LocalStorage
-        const savedReviews = JSON.parse(localStorage.getItem('flexitech_reviews')) || [];
-        savedReviews.push({ name, rate, text });
-        localStorage.setItem('flexitech_reviews', JSON.stringify(savedReviews));
-
-        // 2. Afficher immédiatement
-        renderReview(name, rate, text);
-
-        // 3. Reset
-        this.reset();
-        alert("Merci pour votre avis ! Il est maintenant enregistré.");
-    });
+    window.onload = loadReviews;
   </script>
 </body>
 </html>
