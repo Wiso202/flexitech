@@ -471,20 +471,24 @@
 
         const formData = new FormData(this);
         
-        fetch(SCRIPT_URL, { method: 'POST', body: formData })
-        .then(res => {
-            renderReview(formData.get('nom'), formData.get('note'), formData.get('avis'));
-            this.reset();
-            alert("Avis publié définitivement !");
-        })
-        .catch(err => alert("Erreur lors de la publication."))
-        .finally(() => {
-            btn.disabled = false;
-            btn.innerText = "Publier mon avis";
-        });
-    });
+        // Remplace la partie fetch du POST par celle-ci
+          fetch(SCRIPT_URL, { 
+              method: 'POST', 
+              body: formData,
+              mode: 'no-cors' // Ajoute ceci si l'erreur persiste sur le POST
+          })
+          .then(res => {
+              // Avec no-cors, on ne peut pas lire la réponse, 
+              // donc on considère que c'est bon si pas d'erreur réseau
+              renderReview(formData.get('nom'), formData.get('note'), formData.get('avis'));
+              this.reset();
+              alert("Avis publié !");
+          })
+          .catch(err => alert("Erreur lors de la publication."));
+              });
 
     window.onload = loadReviews;
   </script>
 </body>
 </html>
+
